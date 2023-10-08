@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function calculateSum() {
+    let x = parseFloat(document.getElementById("input_x").value);
+    let y = parseFloat(document.getElementById("input_y").value);
+    let n = parseInt(document.getElementById("input_n").value);
+    let sum = 0;
+
+    for (let i = 1; i <= n; i++) {
+        let factorial = 1;
+        for (let j = 1; j <= i - 1; j++) {
+            factorial *= j;
+        }
+        let numerator = Math.pow(-1, i) * (x + y - factorial);
+        let denominator = factorial;
+        sum += numerator / denominator;
+    }
+
+    document.getElementById("result").textContent = "Сума ряду: " + sum;
+}
+</script>
+</head>
+<body>
+<form>
+    <label for="input_x">Введіть значення x:</label>
+    <input type="text" id="input_x" value="0"><br>
+
+    <label for="input_y">Введіть значення y:</label>
+    <input type="text" id="input_y" value="0"><br>
+
+    <label for="input_n">Введіть значення n:</label>
+    <input type="text" id="input_n" value="5"><br>
+
+    <input type="button" value="Розрахувати" onClick="calculateSum()">
+</form>
+
+<div id="result"></div>
+</body>
+</html>
