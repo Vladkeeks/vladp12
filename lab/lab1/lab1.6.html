@@ -3,8 +3,8 @@
 <head>
 <script>
 let continent = ["Євразія", "Африка", "Північна Америка", "Південна Америка", "Австралія", "Антарктида"];
-let density = ["(густина населення1)", "(густина населення2)", "(густина населення3)", "(густина населення4)", "(густина населення5)", "(густина населення6)"];
-let area = ["(площа1)", "(площа2)", "(площа3)", "(площа4)", "(площа5)", "(площа6)"];
+let density = ["68", "45", "58", "24", "3", "0.00008"];
+let area = ["54,460,000", "30,370,000", "24,709,000", "17,840,000", "8,600,000", "14,000,000"];
 
 let selectedContinentIndex = -1;
 
@@ -13,8 +13,8 @@ function fun1() {
     selectedContinentIndex = continent.indexOf(userInput);
 
     if (selectedContinentIndex !== -1) {
-        document.entryForm.density.value = density[selectedContinentIndex];
-        document.entryForm.area.value = area[selectedContinentIndex];
+        document.entryForm.density.value = density[selectedContinentIndex] + " осіб/км²";
+        document.entryForm.area.value = area[selectedContinentIndex] + " км²";
     } else {
         document.entryForm.density.value = "Континент не знайдено!";
         document.entryForm.area.value = "";
@@ -28,7 +28,7 @@ function fun2() {
 
         if (!isNaN(densityValue) && !isNaN(areaValue)) {
             let population = densityValue * areaValue;
-            document.entryForm.population.value = population;
+            document.entryForm.population.value = population.toFixed(2) + " осіб";
         } else {
             document.entryForm.population.value = "Неможливо обчислити населення";
         }
