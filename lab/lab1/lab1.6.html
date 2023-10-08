@@ -2,9 +2,29 @@
 <html>
 <head>
 <script>
-let continent = ["Євразія", "Африка", "Північна Америка", "Південна Америка", "Австралія", "Антарктида"];
-let density = ["68", "45", "58", "24", "3", "0.00008"];
-let area = ["54,460,000", "30,370,000", "24,709,000", "17,840,000", "8,600,000", "14,000,000"];
+let continent = new Array(6);
+continent[0] = "Євразія";
+continent[1] = "Африка";
+continent[2] = "Північна Америка";
+continent[3] = "Південна Америка";
+continent[4] = "Австралія";
+continent[5] = "Антарктида";
+
+let density = new Array(6);
+density[0] = 68;
+density[1] = 45;
+density[2] = 59;
+density[3] = 25;
+density[4] = 3;
+density[5] = 0.00008;
+
+let area = new Array(6);
+area[0] = 54460000;
+area[1] = 30370000;
+area[2] = 24709000;
+area[3] = 17840000;
+area[4] = 8600000;
+area[5] = 14000000;
 
 let selectedContinentIndex = -1;
 
@@ -23,15 +43,8 @@ function fun1() {
 
 function fun2() {
     if (selectedContinentIndex !== -1) {
-        let densityValue = parseFloat(density[selectedContinentIndex]);
-        let areaValue = parseFloat(area[selectedContinentIndex]);
-
-        if (!isNaN(densityValue) && !isNaN(areaValue)) {
-            let population = densityValue * areaValue;
-            document.entryForm.population.value = population.toFixed(2) + " осіб";
-        } else {
-            document.entryForm.population.value = "Неможливо обчислити населення";
-        }
+        let population = density[selectedContinentIndex] * area[selectedContinentIndex];
+        document.entryForm.population.value = population.toFixed(2) + " осіб";
     } else {
         document.entryForm.population.value = "Спочатку виберіть континент за допомогою кнопки 'Густина і площа'";
     }
