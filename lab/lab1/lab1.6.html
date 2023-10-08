@@ -1,40 +1,26 @@
-<HTML> 
-    <HEAD> 
-    <SCRIPT LANGUAGE='JavaScript'> 
-    let continent = new Array(6); 
-    continent [0] = "Євразія"; 
-    continent [1] = "Африка" ;
-    continent [2] = "Австралія"; 
-    continent [3] = "Північна Америка"; 
-    continent [4] = " Південна Америка"; 
-    continent [5] = " Антарктида"; 
-    let density = new Array (6) 
-    density [0]= "72,5";
-    density [1]= "22" ;
-    density [2]= "2.5";
-    density [3]= "22,9";
-    density [4]= "35";
-    density [5]= "0";
-    let area = new Array (6) ;
-    area [0] = "Євразія - 53890000 км2"; 
-    area [1] = "Африка - 30250000 км2";
-    area [2] = "Австралія - 7690000 км2";
-    area [3] = "Північна Америка - 20,4 млн км2";
-    area [4] = "Південна Америка - 17820000 км2";
-    area [5] = "Антарктида - 13660000 км2";
-    function fun1() { 
-        let userInput = document.entryForm.entry.value; 
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+let continent = ["Євразія", "Африка", "Північна Америка", "Південна Америка", "Австралія", "Антарктида"];
+let density = ["(густина населення1)", "(густина населення2)", "(густина населення3)", "(густина населення4)", "(густина населення5)", "(густина населення6)"];
+let area = ["(площа1)", "(площа2)", "(площа3)", "(площа4)", "(площа5)", "(площа6)"];
+
+let selectedContinentIndex = -1;
+
+function fun1() {
+    let userInput = document.entryForm.entry.value;
     selectedContinentIndex = continent.indexOf(userInput);
 
     if (selectedContinentIndex !== -1) {
-        let outputText = `Континент: ${continent[selectedContinentIndex]}\n`;
-        outputText += `Густина населення: ${density[selectedContinentIndex]}\n`;
-        outputText += `Площа: ${area[selectedContinentIndex]}`;
-        document.entryForm.output.value = outputText;
+        document.entryForm.density.value = density[selectedContinentIndex];
+        document.entryForm.area.value = area[selectedContinentIndex];
     } else {
-        document.entryForm.output.value = "Континент не знайдено!";
+        document.entryForm.density.value = "Континент не знайдено!";
+        document.entryForm.area.value = "";
     }
 }
+
 function fun2() {
     if (selectedContinentIndex !== -1) {
         let densityValue = parseFloat(density[selectedContinentIndex]);
@@ -50,18 +36,21 @@ function fun2() {
         document.entryForm.population.value = "Спочатку виберіть континент за допомогою кнопки 'Густина і площа'";
     }
 }
-</SCRIPT> 
-</ HEAD>
-<BODY> 
-<FORM NAME="entryForm"> 
+</script>
+</head>
+<body>
+<form name="entryForm">
 Введіть назву континенту:
-<INPUT TYPE="text" NAME="entry"> 
-<INPUT TYPE="button" VALUE="Густина і площа" onClick=" fun1()">> 
-    <br>
-    <input type="button" value="Населення" onClick="fun2()">
-    <br>
-<BR>
-<INPUT TYPE="text" SIZE="70" NAME="output">
-</ FORM> 
-</ BODY> 
-</ HTML>
+<input type="text" name="entry">
+<input type="button" value="Густина і площа" onClick="fun1()">
+<br>
+Густина населення: <input type="text" name="density" readonly>
+<br>
+Площа: <input type="text" name="area" readonly>
+<br>
+<input type="button" value="Населення" onClick="fun2()">
+<br>
+Населення: <input type="text" name="population" readonly>
+</form>
+</body>
+</html>
