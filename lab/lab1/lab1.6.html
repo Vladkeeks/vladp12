@@ -42,12 +42,12 @@ function fun2() {
 
         if (!isNaN(densityValue) && !isNaN(areaValue)) {
             let population = densityValue * areaValue;
-            document.entryForm.output.value = `Населення: ${population}`;
+            document.entryForm.population.value = population;
         } else {
-            document.entryForm.output.value = "Неможливо обчислити населення";
+            document.entryForm.population.value = "Неможливо обчислити населення";
         }
     } else {
-        document.entryForm.output.value = "Спочатку виберіть континент за допомогою кнопки 'Густина і площа'";
+        document.entryForm.population.value = "Спочатку виберіть континент за допомогою кнопки 'Густина і площа'";
     }
 }
 </SCRIPT> 
