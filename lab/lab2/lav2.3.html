@@ -4,63 +4,60 @@
   <meta charset="utf-8">
 </head>
 <body>
-<form id="main_form">
-  <table>
-    <tr>
-      <td>Кількість строк</td>
-      <td><input type="text" id="t_str" value="5"></td>
-    </tr>
-    <tr>
-      <td>Кількість стовбців</td>
-      <td><input type="text" id="t_stb" value="5"></td>
-    </tr>
-    <tr>
-      <td><input type="button" onClick="fun();" value="Побудувати матрицю"></td>
-    </tr>
-    <tr>
-      <td><input type="button" onClick="fun_build();" value="Розрахувати"></td>
-    </tr>
-  </table>
-  <div id="main_div"></div>
-</form>
-<script>
-let str, stb;
-function fun() {
-  str = parseInt(main_form.t_str.value);
-  stb = parseInt(main_form.t_stb.value);
-  let res_str = "<table>\n";
-  for (let i = 1; i <= str; i++) {
-    res_str += "<tr>\n";
-    for (let j = 1; j <= stb; j++) {
-      res_str += "<td>";
-      res_str += "<input type=\"text\" id=\"_" + i + "_" + j + "\" value=\"" + (2 * i + j) + "\">";
-      res_str += "<\/td>\n";
+  <h2>Введіть кількість рядків та стовпців:</h2>
+  <form>
+    <label for="rowCount">Кількість рядків:</label>
+    <input type="text" id="rowCount">
+    <label for="columnCount">Кількість стовпців:</label>
+    <input type="text" id="columnCount">
+    <button type="button" onclick="createTableAndCalculate()">Створити таблицю та розрахувати</button>
+  </form>
+
+  <h2>Таблиця:</h2>
+  <table id="resultTable"></table>
+
+  <p id="result"></p>
+
+  <script>
+    let rowCount, columnCount;
+
+    function createTableAndCalculate() {
+      rowCount = parseInt(document.getElementById("rowCount").value);
+      columnCount = parseInt(document.getElementById("columnCount").value);
+      const table = document.getElementById("resultTable");
+      let tableHTML = "";
+
+      for (let i = 1; i <= rowCount; i++) {
+        tableHTML += "<tr>";
+        for (let j = 1; j <= columnCount; j++) {
+          const value = 2 * i + j;
+          tableHTML += `<td>${value}</td>`;
+        }
+        tableHTML += "</tr>";
+      }
+
+      table.innerHTML = tableHTML;
+      calculateResult();
     }
-    res_str += "<\/tr>\n";
-  }
-  res_str += "<\/table>";
-  main_div.innerHTML = res_str;
-}
 
-function fun_build() {
-  let res_str = "";
-  let col_sums = new Array(stb).fill(0);
+    function calculateResult() {
+      const table = document.getElementById("resultTable");
+      const rows = table.getElementsByTagName("tr");
+      const columns = table.getElementsByTagName("td");
 
-  for (let i = 1; i <= str; i++) {
-    for (let j = 1; j <= stb; j++) {
-      let inputElement = document.getElementById("_" + i + "_" + j);
-      let inputValue = parseInt(inputElement.value);
-      col_sums[j - 1] += inputValue;
+      let sum = 0;
+
+      // Обчислення суми елементів відповідно до варіанту
+      if (rowCount === 1) {
+        for (let i = 0; i < rows.length; i++) {
+          for (let j = 0; j < columns.length; j++) {
+            sum += parseInt(columns[i * columnCount + j].textContent);
+          }
+        }
+      }
+
+      document.getElementById("result").textContent = `Сума елементів: ${sum}`;
     }
-  }
-
-  let str_report = "Суми стовпців:\n";
-  for (let j = 1; j <= stb; j++) {
-    str_report += "Стовпець " + j + ": " + col_sums[j - 1] + ";\n";
-  }
-
-  alert(str_report);
-}
-</script>
+  </script>
 </body>
 </html>

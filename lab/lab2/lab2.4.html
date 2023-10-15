@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Операції та вивід</title>
+</head>
+<body>
+  <h1>Операції та вивід</h1>
+  <p>Введіть два числа для виконання операцій:</p>
+  <form id="operationForm">
+    <label for="number1">Число 1:</label>
+    <input type="number" id="number1">
+    <br>
+    <label for="number2">Число 2:</label>
+    <input type="number" id="number2">
+    <br>
+    <button type="button" onclick="calculateOperations()">Виконати операції</button>
+  </form>
+  <h2>Результати:</h2>
+  <div id="results"></div>
+
+  <script>
+    function calculateOperations() {
+      const number1 = parseFloat(document.getElementById("number1").value);
+      const number2 = parseFloat(document.getElementById("number2").value);
+
+      if (isNaN(number1) || isNaN(number2)) {
+        document.getElementById("results").innerHTML = "Будь ласка, введіть коректні числа.";
+        return;
+      }
+
+      const remainder = number1 % number2;
+      const isZeroRemainder = remainder === 0;
+
+      const results = `
+        <p>Остача від ділення ${number1} на ${number2} дорівнює ${remainder}</p>
+        <p>Остача від ділення ${number1} на ${number2} рівна нулю: ${isZeroRemainder}</p>
+      `;
+
+      document.getElementById("results").innerHTML = results;
+    }
+  </script>
+</body>
+</html>
