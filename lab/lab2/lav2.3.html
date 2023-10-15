@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h2>Введіть кількість рядків та стовпців:</h2>
+  <form>
+    <label for="rowCount">Кількість рядків:</label>
+    <input type="text" id="rowCount">
+    <label for="columnCount">Кількість стовпців:</label>
+    <input type="text" id="columnCount">
+    <button type="button" onclick="createTableAndCalculate()">Створити таблицю та розрахувати</button>
+  </form>
+
+  <h2>Таблиця:</h2>
+  <table id="resultTable"></table>
+
+  <p id="result"></p>
+
+  <script>
+    function createTableAndCalculate() {
+      const rowCount = parseInt(document.getElementById("rowCount").value);
+      const columnCount = parseInt(document.getElementById("columnCount").value);
+      const table = document.getElementById("resultTable");
+      let tableHTML = "";
+
+      for (let i = 1; i <= rowCount; i++) {
+        tableHTML += "<tr>";
+        for (let j = 1; j <= columnCount; j++) {
+          const value = 2 * i + j;
+          tableHTML += `<td>${value}</td>`;
+        }
+        tableHTML += "</tr>";
+      }
+
+      table.innerHTML = tableHTML;
+      calculateResult();
+    }
+
+    function calculateResult() {
+      const table = document.getElementById("resultTable");
+      const rows = table.getElementsByTagName("tr");
+      const columns = table.getElementsByTagName("td");
+
+      let sum = 0;
+
+      // Обчислення суми елементів відповідно до варіанту
+      if (rowCount === 1) {
+        for (let i = 0; i < rows.length; i++) {
+          for (let j = 0; j < columns.length; j++) {
+            sum += parseInt(columns[i * rows.length + j].textContent);
+          }
+        }
+      }
+
+      document.getElementById("result").textContent = `Сума елементів: ${sum}`;
+    }
+  </script>
+</body>
+</html>
