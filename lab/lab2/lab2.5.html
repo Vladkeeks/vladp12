@@ -6,14 +6,15 @@
 </head>
 <body>
   <h1>Робота з методами console</h1>
+  <!-- Кнопки для виклику методів -->
   <button onclick="logInfo()">console.info()</button>
   <button onclick="logWarn()">console.warn()</button>
   <button onclick="logError()">console.error()</button>
   <button onclick="logDir()">console.dir()</button>
   <button onclick="logDirXml()">console.dirxml()</button>
-  <button onclick="logTime()">console.time()</button>
+  <button onclick="logTimeStart()">console.time()</button>
   <button onclick="logTimeEnd()">console.timeEnd()</button>
-  <button onclick="logProfile()">console.profile()</button>
+  <button onclick="logProfileStart()">console.profile()</button>
   <button onclick="logProfileEnd()">console.profileEnd()</button>
   <button onclick="logAssert()">console.assert()</button>
 
@@ -40,18 +41,16 @@
       console.dirxml(element);
     }
 
-    function logTime() {
+    function logTimeStart() {
       console.time("myTimer");
-      // Ваш код для вимірювання
     }
 
     function logTimeEnd() {
       console.timeEnd("myTimer");
     }
 
-    function logProfile() {
+    function logProfileStart() {
       console.profile("myProfile");
-      // Ваш код для вимірювання
     }
 
     function logProfileEnd() {
