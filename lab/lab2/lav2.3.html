@@ -44,16 +44,21 @@ function fun() {
 
 function fun_build() {
   let res_str = "";
-  let str_report = "";
+  let col_sums = new Array(stb).fill(0);
+
   for (let i = 1; i <= str; i++) {
-    let sum = 0;
     for (let j = 1; j <= stb; j++) {
       let inputElement = document.getElementById("_" + i + "_" + j);
       let inputValue = parseInt(inputElement.value);
-      sum += inputValue;
+      col_sums[j - 1] += inputValue;
     }
-    str_report += "Сумма " + i + " строки = " + sum + ";\n";
   }
+
+  let str_report = "Суми стовпців:\n";
+  for (let j = 1; j <= stb; j++) {
+    str_report += "Стовпець " + j + ": " + col_sums[j - 1] + ";\n";
+  }
+
   alert(str_report);
 }
 </script>
