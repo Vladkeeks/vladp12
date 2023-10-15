@@ -19,9 +19,11 @@
   <p id="result"></p>
 
   <script>
+    let rowCount, columnCount;
+
     function createTableAndCalculate() {
-      const rowCount = parseInt(document.getElementById("rowCount").value);
-      const columnCount = parseInt(document.getElementById("columnCount").value);
+      rowCount = parseInt(document.getElementById("rowCount").value);
+      columnCount = parseInt(document.getElementById("columnCount").value);
       const table = document.getElementById("resultTable");
       let tableHTML = "";
 
@@ -45,11 +47,11 @@
 
       let sum = 0;
 
-      // Обчислення суми елементів відповідно до варіанту
+     
       if (rowCount === 1) {
         for (let i = 0; i < rows.length; i++) {
           for (let j = 0; j < columns.length; j++) {
-            sum += parseInt(columns[i * rows.length + j].textContent);
+            sum += parseInt(columns[i * columnCount + j].textContent);
           }
         }
       }
