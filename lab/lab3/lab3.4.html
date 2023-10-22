@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Перегляд зображень</title>
+</head>
+<body>
+    <button onclick="showPreviousImage()">Назад</button>
+    <button onclick="showNextImage()">Вперед</button>
+    <br>
+    <img id="image-display" src="" alt="Зображення">
+    
+    <script>
+        let imageFiles = ['file1.jpg', 'file2.gif', 'file3.gif']; // Замініть цей масив іменами своїх файлів
+        let currentImageIndex = 0;
+        let imageDisplay = document.getElementById('image-display');
+        
+        function showImage(index) {
+            if (index < 0) {
+                currentImageIndex = 0;
+            } else if (index >= imageFiles.length) {
+                currentImageIndex = imageFiles.length - 1;
+            } else {
+                currentImageIndex = index;
+            }
+            imageDisplay.src = imageFiles[currentImageIndex];
+        }
+        
+        function showPreviousImage() {
+            showImage(currentImageIndex - 1);
+        }
+        
+        function showNextImage() {
+            showImage(currentImageIndex + 1);
+        }
+        
+        // Відобразити перше зображення при завантаженні сторінки
+        showImage(currentImageIndex);
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Екранна клавіатура</title>
+    <style>
+        .keyboard-button {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="keyboard">
+        <button class="keyboard-button" onclick="addLetter('а')">а</button>
+        <button class="keyboard-button" onclick="addLetter('б')">б</button>
+        <button class="keyboard-button" onclick="addLetter('в')">в</button>
+        <button class="keyboard-button" onclick="addLetter('г')">г</button>
+        <button class="keyboard-button" onclick="addLetter('д')">д</button>
+        <button class="keyboard-button" onclick="addLetter('е')">е</button>
+        <button class="keyboard-button" onclick="addLetter('є')">є</button>
+        <button class="keyboard-button" onclick="addLetter('и')">и</button>
+        <button class="keyboard-button" onclick="addLetter('і')">і</button>
+        <button class="keyboard-button" onclick="addLetter('ї')">ї</button>
+    </div>
+
+    <br>
+
+    <button onclick="toggleLayout()">Alt+Shift</button>
+    <button onclick="clearText()">Очистити поле</button>
+
+    <br>
+
+    <textarea id="text-area" rows="5" cols="50"></textarea>
+
+    <script>
+        let isUkrainianLayout = true;
+
+        function addLetter(letter) {
+            const textArea = document.getElementById('text-area');
+            textArea.value += letter;
+        }
+
+        function clearText() {
+            const textArea = document.getElementById('text-area');
+            textArea.value = '';
+        }
+
+        function toggleLayout() {
+            isUkrainianLayout = !isUkrainianLayout;
+            const buttons = document.getElementsByClassName('keyboard-button');
+
+            for (let i = 0; i < buttons.length; i++) {
+                if (isUkrainianLayout) {
+                    buttons[i].textContent = buttons[i].textContent.replace(/[a-z]/, '');
+                } else {
+                    buttons[i].textContent = buttons[i].textContent + 'a';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
