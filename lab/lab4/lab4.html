@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тестування</title>
+    <script>
+        function calculateResult(form) {
+            let totalScore = 0;
+
+            // Оцінка першого питання (радіокнопки)
+            let radioScore = 0;
+            const radioInputs0 = document.getElementsByName('pol0');
+            for (let i = 0; i < radioInputs0.length; i++) {
+                if (radioInputs0[i].checked && radioInputs0[i].value === '1') {
+                    radioScore = 1;
+                    break;
+                }
+            }
+            totalScore += radioScore;
+            document.getElementById('rezultatRadio0').innerHTML = radioScore;
+
+            // Оцінка другого питання (прапорці)
+            let checkboxScore = 0;
+            const checkboxInputs = document.getElementsByName('checkbox1');
+            let checkboxSelected = 0;
+            for (let i = 0; i < checkboxInputs.length; i++) {
+                if (checkboxInputs[i].checked) {
+                    checkboxSelected++;
+                    if (checkboxInputs[i].value === '1' || checkboxInputs[i].value === '2') {
+                        checkboxScore++;
+                    }
+                }
+            }
+            if (checkboxSelected === 2 && checkboxScore === 2) {
+                checkboxScore = 2;
+            } else if (checkboxSelected === 2 && checkboxScore === 1) {
+                checkboxScore = 1;
+            } else {
+                checkboxScore = 0;
+            }
+            totalScore += checkboxScore;
+            document.getElementById('rezultatCheckbox1').innerHTML = checkboxScore;
+
+            // Тут продовжуйте оцінку для інших типів питань
+
+            // Підсумковий результат
+            document.getElementById('totalScore').innerHTML = totalScore;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="calculateResult(this); return false;">
+        <h3>Питання 1: Виберіть один варіант</h3>
+        <input type="radio" name="pol0" value="0"> Відповідь 1<br>
+        <input type="radio" name="pol0" value="1"> Відповідь 2<br>
+        <input type="radio" name="pol0" value="0"> Відповідь 3<br>
+        <input type="radio" name="pol0" value="0"> Відповідь 4<br>
+        Результат: <span id="rezultatRadio0"></span><br><br>
+
+        <h3>Питання 2: Виберіть два варіанти</h3>
+        <input type="checkbox" name="checkbox1" value="0"> Відповідь 1<br>
+        <input type="checkbox" name="checkbox1" value="1"> Відповідь 2<br>
+        <input type="checkbox" name="checkbox1" value="1"> Відповідь 3<br>
+        <input type="checkbox" name="checkbox1" value="0"> Відповідь 4<br>
+        Результат: <span id="rezultatCheckbox1"></span><br><br>
+
+        <!-- Додайте інші типи питань тут -->
+
+        <input type="submit" value="Завершити тест">
+    </form>
+
+    <h4>Загальний результат</h4>
+    <p>Загальний бал: <span id="totalScore"></span></p>
+</body>
+</html>
