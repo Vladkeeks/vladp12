@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        .invalid {
+            border: 2px double red;
+            color: red;
+        }
+
+        .valid {
+            border: 2px solid green;
+        }
+
+        .validation-message {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+
+    <form id="registrationForm" action="#" method="post">
+        <label for="email">Електронна пошта:</label>
+        <input type="email" id="email" name="email" required><span id="emailMessage" class="validation-message"></span><br>
+
+        <label for="name">Ім’я та прізвище:</label>
+        <input type="text" id="name" name="name" required pattern="^[А-ЯІЇЄҐA-Z][а-яіїєґa-z]+ [А-ЯІЇЄҐA-Z]+[а-яіїєґa-z]+$"><span id="nameMessage" class="validation-message"></span><br>
+
+        <label for="login">Логін:</label>
+        <input type="text" id="login" name="login" required pattern="[a-zA-Z]+"><span id="loginMessage" class="validation-message"></span><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[_-!@#$%^&*]).{8,}$"><span id="passwordMessage" class="validation-message"></span><br>
+
+        <label for="postalCode">Поштовий індекс:</label>
+        <input type="text" id="postalCode" name="postalCode" required pattern="\d{5}"><span id="postalCodeMessage" class="validation-message"></span><br>
+
+        <input type="submit" value="Зареєструватися">
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            if (!validateForm()) {
+                event.preventDefault();
+            }
+        });
+
+        function validateForm() {
+            let emailRegex = /@[a-z]+\.(pnu\.edu\.ua)$/i;
+            let nameRegex = /^[А-ЯІЇЄҐA-Z][а-яіїєґa-z]+ [А-ЯІЇЄҐA-Z]+[а-яіїєґa-z]+$/;
+            let loginRegex = /^[a-zA-Z]+$/;
+            let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_-!@#$%^&*]).{8,}$/;
+            let postalCodeRegex = /^\d{5}$/;
+
+            function setValidity(elementId, isValid, message) {
+                let element = document.getElementById(elementId);
+                if (isValid) {
+                    element.classList.remove('invalid');
+                    element.classList.add('valid');
+                    element.nextElementSibling.textContent = '';
+                } else {
+                    element.classList.remove('valid');
+                    element.classList.add('invalid');
+                    element.nextElementSibling.textContent = message;
+                }
+            }
+
+            let email = document.getElementById('email').value;
+            setValidity('email', emailRegex.test(email), 'Некоректний формат електронної пошти!');
+
+            let name = document.getElementById('name').value;
+            setValidity('name', nameRegex.test(name), 'Некоректне ім’я та/або прізвище!');
+
+            let login = document.getElementById('login').value;
+            setValidity('login', loginRegex.test(login), 'Некоректний логін!');
+
+            let password = document.getElementById('password').value;
+            setValidity('password', passwordRegex.test(password), 'Некоректний пароль!');
+
+            let postalCode = document.getElementById('postalCode').value;
+            setValidity('postalCode', postalCodeRegex.test(postalCode), 'Некоректний поштовий індекс!');
+
+            return document.querySelectorAll('.invalid').length === 0;
+        }
+    </script>
+</body>
+</html>
