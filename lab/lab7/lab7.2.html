@@ -28,7 +28,25 @@
   <button onclick="capitalizeFirst()">Перетворити</button>
   <p id="capitalizeFirstResult"></p>
 
-  <!-- Аналогічно додайте решту функцій (2.4 - 2.6) з відповідними полями та кнопками -->
+  <h2>2.4. Підрахунок голосних літер</h2>
+  <label for="countVowelsString">Рядок:</label>
+  <input type="text" id="countVowelsString">
+  <button onclick="countVowels()">Підрахувати</button>
+  <p id="countVowelsResult"></p>
+
+  <h2>2.5. Перевірка на спам</h2>
+  <label for="spamString">Рядок:</label>
+  <input type="text" id="spamString">
+  <button onclick="checkSpam()">Перевірити</button>
+  <p id="checkSpamResult"></p>
+
+  <h2>2.6. Скорочення рядка</h2>
+  <label for="truncateString">Рядок:</label>
+  <input type="text" id="truncateString">
+  <label for="maxLength">Максимальна довжина:</label>
+  <input type="number" id="maxLength">
+  <button onclick="truncateString()">Скоротити</button>
+  <p id="truncateStringResult"></p>
 
   <script>
     function compareLengths() {
@@ -65,8 +83,26 @@
       document.getElementById('capitalizeFirstResult').innerText = `Результат: ${capitalizedString}`;
     }
 
-    // Додайте аналогічні функції для решти завдань (2.4 - 2.6) тут
+    function countVowels() {
+      const countVowelsString = document.getElementById('countVowelsString').value;
+      const vowels = "AEIOUaeiou";
+      const count = Array.from(countVowelsString).filter(letter => vowels.includes(letter)).length;
+      document.getElementById('countVowelsResult').innerText = `Кількість голосних: ${count}`;
+    }
 
+    function checkSpam() {
+      const spamString = document.getElementById('spamString').value.toLowerCase();
+      const spamWords = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+      const isSpam = spamWords.some(word => spamString.includes(word.toLowerCase()));
+      document.getElementById('checkSpamResult').innerText = `Чи є спамом? ${isSpam ? 'Так' : 'Ні'}`;
+    }
+
+    function truncateString() {
+      const truncateString = document.getElementById('truncateString').value;
+      const maxLength = parseInt(document.getElementById('maxLength').value);
+      const truncated = (truncateString.length > maxLength) ? truncateString.slice(0, maxLength - 3) + "..." : truncateString;
+      document.getElementById('truncateStringResult').innerText = `Результат: ${truncated}`;
+    }
   </script>
 </body>
 </html>
