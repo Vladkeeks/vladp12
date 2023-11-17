@@ -83,11 +83,11 @@
       document.getElementById('capitalizeFirstResult').innerText = `Результат: ${capitalizedString}`;
     }
 
-    function countVowels() {
-      const countVowelsString = document.getElementById('countVowelsString').value;
-      const vowels = "AEIOUaeiou";
-      const count = Array.from(countVowelsString).filter(letter => vowels.includes(letter)).length;
-      document.getElementById('countVowelsResult').innerText = `Кількість голосних: ${count}`;
+    function countVowelsUkr() {
+      const countVowelsUkrString = document.getElementById('countVowelsUkrString').value;
+      const vowelsUkr = "АаЕеІіЇїОоУуЮюЯяЄє";
+      const countUkr = Array.from(countVowelsUkrString).filter(letter => vowelsUkr.includes(letter)).length;
+      document.getElementById('countVowelsUkrResult').innerText = `Кількість голосних (українські): ${countUkr}`;
     }
 
     function checkSpam() {
