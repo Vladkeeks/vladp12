@@ -19,10 +19,10 @@
         <button class="keyboard-button" onclick="addLetter('а')">а</button>
         <button class="keyboard-button" onclick="addLetter('б')">б</button>
         <button class="keyboard-button" onclick="addLetter('в')">в</button>
-        <button class="keyboard-button" onclick="addLetter('г')">a</button>
-        <button class="keyboard-button" onclick="addLetter('д')">b</button>
-        <button class="keyboard-button" onclick="addLetter('е')">c</button>
-        </div>
+        <button class="keyboard-button" onclick="addLetter('г')">г</button>
+        <button class="keyboard-button" onclick="addLetter('д')">д</button>
+        <button class="keyboard-button" onclick="addLetter('е')">е</button>
+    </div>
 
     <br>
 
@@ -34,17 +34,17 @@
     <textarea id="text-area" rows="5" cols="50"></textarea>
 
     <script>
-      const ukrainianLetters = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї'];
-const englishLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+        let isUkrainianLayout = true;
+        const ukrainianLetters = ['а', 'б', 'в', 'г', 'д', 'е'];
+        const englishLetters = ['a', 'b', 'v', 'h', 'd', 'e'];
 
-function addLetter(letter) {
-    const textArea = document.getElementById('text-area');
-    const index = isUkrainianLayout ? ukrainianLetters.indexOf(letter) : englishLetters.indexOf(letter);
-    if (index !== -1) {
-        textArea.value += isUkrainianLayout ? englishLetters[index] : ukrainianLetters[index];
-    }
-}
-
+        function addLetter(letter) {
+            const textArea = document.getElementById('text-area');
+            const index = isUkrainianLayout ? ukrainianLetters.indexOf(letter) : englishLetters.indexOf(letter);
+            if (index !== -1) {
+                textArea.value += isUkrainianLayout ? englishLetters[index] : ukrainianLetters[index];
+            }
+        }
 
         function clearText() {
             const textArea = document.getElementById('text-area');
@@ -52,22 +52,20 @@ function addLetter(letter) {
         }
 
         function toggleLayout() {
-    isUkrainianLayout = !isUkrainianLayout;
-    const buttons = document.getElementsByClassName('keyboard-button');
-    const toggleButton = document.getElementById('toggle-layout');
+            isUkrainianLayout = !isUkrainianLayout;
+            const buttons = document.getElementsByClassName('keyboard-button');
+            const toggleButton = document.getElementById('toggle-layout');
 
-    for (let i = 0; i < buttons.length; i++) {
-        if (isUkrainianLayout) {
-            buttons[i].textContent = ukrainianLetters[i];
-            toggleButton.textContent = 'Alt+Shift (EN)';
-        } else {
-            buttons[i].textContent = englishLetters[i];
-            toggleButton.textContent = 'Alt+Shift (UK)';
+            for (let i = 0; i < buttons.length; i++) {
+                if (isUkrainianLayout) {
+                    buttons[i].textContent = ukrainianLetters[i];
+                    toggleButton.textContent = 'Alt+Shift (EN)';
+                } else {
+                    buttons[i].textContent = englishLetters[i];
+                    toggleButton.textContent = 'Alt+Shift (UK)';
+                }
+            }
         }
-    }
-}
-
-        
     </script>
 </body>
 </html>
