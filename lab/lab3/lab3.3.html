@@ -34,14 +34,17 @@
     <textarea id="text-area" rows="5" cols="50"></textarea>
 
     <script>
-        let isUkrainianLayout = true;
-        const ukrainianLetters = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї'];
-        const englishLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+      const ukrainianLetters = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї'];
+const englishLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 
-        function addLetter(letter) {
-            const textArea = document.getElementById('text-area');
-            textArea.value += letter;
-        }
+function addLetter(letter) {
+    const textArea = document.getElementById('text-area');
+    const index = isUkrainianLayout ? ukrainianLetters.indexOf(letter) : englishLetters.indexOf(letter);
+    if (index !== -1) {
+        textArea.value += isUkrainianLayout ? englishLetters[index] : ukrainianLetters[index];
+    }
+}
+
 
         function clearText() {
             const textArea = document.getElementById('text-area');
@@ -49,20 +52,22 @@
         }
 
         function toggleLayout() {
-            isUkrainianLayout = !isUkrainianLayout;
-            const buttons = document.getElementsByClassName('keyboard-button');
-            const toggleButton = document.getElementById('toggle-layout');
+    isUkrainianLayout = !isUkrainianLayout;
+    const buttons = document.getElementsByClassName('keyboard-button');
+    const toggleButton = document.getElementById('toggle-layout');
 
-            for (let i = 0; i < buttons.length; i++) {
-                if (isUkrainianLayout) {
-                    buttons[i].textContent = ukrainianLetters[i];
-                    toggleButton.textContent = 'Alt+Shift (EN)';
-                } else {
-                    buttons[i].textContent = englishLetters[i];
-                    toggleButton.textContent = 'Alt+Shift (UK)';
-                }
-            }
+    for (let i = 0; i < buttons.length; i++) {
+        if (isUkrainianLayout) {
+            buttons[i].textContent = ukrainianLetters[i];
+            toggleButton.textContent = 'Alt+Shift (EN)';
+        } else {
+            buttons[i].textContent = englishLetters[i];
+            toggleButton.textContent = 'Alt+Shift (UK)';
         }
+    }
+}
+
+        
     </script>
 </body>
 </html>
