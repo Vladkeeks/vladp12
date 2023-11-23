@@ -16,12 +16,6 @@
 </head>
 <body>
     <div id="keyboard">
-        <button class="keyboard-button" onclick="addLetter('а')">а</button>
-        <button class="keyboard-button" onclick="addLetter('б')">б</button>
-        <button class="keyboard-button" onclick="addLetter('в')">в</button>
-        <button class="keyboard-button" onclick="addLetter('г')">г</button>
-        <button class="keyboard-button" onclick="addLetter('д')">д</button>
-        <button class="keyboard-button" onclick="addLetter('е')">е</button>
     </div>
 
     <br>
@@ -35,8 +29,8 @@
 
     <script>
         let isUkrainianLayout = true;
-        const ukrainianLetters = ['а', 'б', 'в', 'г', 'д', 'е'];
-        const englishLetters = ['a', 'b', 'v', 'h', 'd', 'e'];
+        const ukrainianLetters = ['а','б','в','г','д','е','є','и','і','ї'];
+        const englishLetters = ['a','b','v','h','d','e','ye','y','i','yi'];
 
         function addLetter(letter) {
             const textArea = document.getElementById('text-area');
@@ -66,6 +60,24 @@
                 }
             }
         }
+
+        // Функція для створення кнопок клавіатури
+        function createKeyboard() {
+            const keyboard = document.getElementById('keyboard');
+
+            for (let i = 0; i < ukrainianLetters.length; i++) {
+                const button = document.createElement('button');
+                button.className = 'keyboard-button';
+                button.textContent = ukrainianLetters[i];
+                button.setAttribute('onclick', `addLetter('${ukrainianLetters[i]}')`);
+                keyboard.appendChild(button);
+            }
+        }
+
+        // Створення клавіатури при завантаженні сторінки
+        window.onload = function() {
+            createKeyboard();
+        };
     </script>
 </body>
 </html>
