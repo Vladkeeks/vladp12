@@ -16,7 +16,7 @@
     <label for="secondsInput">Секунди:</label>
     <input type="number" id="secondsInput">
     
-    <button onclick="displayTime()">Вивести час</button>
+    <button onclick="updateTime()">Оновити час</button>
   </div>
   
   <div>
@@ -40,12 +40,20 @@
   <p id="timeDisplay"></p>
 
   <script>
-    // Створення об'єкта, що описує час
     const time = {
       hours: 0,
       minutes: 0,
       seconds: 0
     };
+
+    // Функція для оновлення часу на основі введених значень
+    function updateTime() {
+      time.hours = parseInt(document.getElementById('hoursInput').value) || 0;
+      time.minutes = parseInt(document.getElementById('minutesInput').value) || 0;
+      time.seconds = parseInt(document.getElementById('secondsInput').value) || 0;
+
+      displayTime();
+    }
 
     // Функція для виведення часу на екран
     function displayTime() {
@@ -53,7 +61,7 @@
       timeDisplay.textContent = `Час: ${time.hours} годин, ${time.minutes} хвилин, ${time.seconds} секунд`;
     }
 
-    // Функція для зміни часу на передану кількість секунд
+    // Функції для додавання часу
     function addSeconds() {
       const secondsInput = parseInt(document.getElementById('addSeconds').value);
       time.seconds += secondsInput;
@@ -61,7 +69,6 @@
       displayTime();
     }
 
-    // Функція для зміни часу на передану кількість хвилин
     function addMinutes() {
       const minutesInput = parseInt(document.getElementById('addMinutes').value);
       time.minutes += minutesInput;
@@ -69,7 +76,6 @@
       displayTime();
     }
 
-    // Функція для зміни часу на передану кількість годин
     function addHours() {
       const hoursInput = parseInt(document.getElementById('addHours').value);
       time.hours += hoursInput;
@@ -77,7 +83,7 @@
       displayTime();
     }
 
-    // Функція для коригування часу (наприклад, переведення хвилин у години та секунди у хвилини)
+    // Функція для коригування часу
     function adjustTime() {
       while (time.seconds >= 60) {
         time.seconds -= 60;
