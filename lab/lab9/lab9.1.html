@@ -40,6 +40,11 @@
     <div id="brick"></div>
   </div>
 
+  <h2>Анімація відскоку (bounceEaseInOut)</h2>
+  <div id="path2">
+    <div id="brick2"></div>
+  </div>
+
   <script>
     function animate({duration, timing, draw}) {
       let start = performance.now();
@@ -61,6 +66,7 @@
     let train = document.getElementById('train');
     let elem = document.getElementById('elem');
     let brick = document.getElementById('brick');
+    let brick2 = document.getElementById('brick2');
   
     animate({
       duration: 1000,
@@ -118,6 +124,27 @@
         timing: bounceEaseOut,
         draw: function(progress) {
           brick.style.left = progress * 500 + 'px';
+        }
+      });
+    };
+
+    function makeEaseInOut(timing) {
+      return function(timeFraction) {
+        if (timeFraction < .5)
+          return timing(2 * timeFraction) / 2;
+        else
+          return (2 - timing(2 * (1 - timeFraction))) / 2;
+      }
+    }
+
+    let bounceEaseInOut = makeEaseInOut(bounce);
+
+    brick2.onclick = function() {
+      animate({
+        duration: 3000,
+        timing: bounceEaseInOut,
+        draw: function(progress) {
+          brick2.style.left = progress * 500 + 'px';
         }
       });
     };
