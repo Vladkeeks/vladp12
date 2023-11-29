@@ -11,6 +11,20 @@
     progress {
       width: 5%;
     }
+    
+    #brick {
+      width: 40px;
+      height: 20px;
+      background: #EE6B47;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #path {
+      outline: 1px solid #E8C48E;
+      width: 540px;
+      height: 20px;
+    }
   </style>
 </head>
 
@@ -20,6 +34,11 @@
 
   <h2>Анімація зміни ширини</h2>
   <progress id="elem" value="0" max="100"></progress>
+
+  <h2>Анімація відскоку (bounce)</h2>
+  <div id="path">
+    <div id="brick"></div>
+  </div>
 
   <script>
     function animate({duration, timing, draw}) {
@@ -41,6 +60,7 @@
   
     let train = document.getElementById('train');
     let elem = document.getElementById('elem');
+    let brick = document.getElementById('brick');
   
     animate({
       duration: 1000,
@@ -72,6 +92,32 @@
         },
         draw: function(progress) {
           elem.style.width = progress * 100 + '%';
+        }
+      });
+    };
+  
+    function makeEaseOut(timing) {
+      return function(timeFraction) {
+        return 1 - timing(1 - timeFraction);
+      }
+    }
+  
+    function bounce(timeFraction) {
+      for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+        }
+      }
+    }
+  
+    let bounceEaseOut = makeEaseOut(bounce);
+  
+    brick.onclick = function() {
+      animate({
+        duration: 3000,
+        timing: bounceEaseOut,
+        draw: function(progress) {
+          brick.style.left = progress * 500 + 'px';
         }
       });
     };
