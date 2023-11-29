@@ -1,43 +1,36 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+
 <head>
-  <title>Анімація</title>
   <style>
     #train {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: blue;
+      position: relative;
+      cursor: pointer;
     }
   </style>
 </head>
+
 <body>
 
-<div id="train"></div>
+  <img id="train" src="https://js.cx/clipart/train.gif">
 
-<script>
-let start = Date.now(); // зберігаємо час початку
 
-let timer = setInterval(function() {
-  // скільки часу пройшло від початку?
-  let timePassed = Date.now() - start;
+  <script>
+    train.onclick = function() {
+      let start = Date.now();
 
-  if (timePassed >= 2000) {
-    clearInterval(timer); // завершуємо анімацію через 2 секунди
-    return;
-  }
+      let timer = setInterval(function() {
+        let timePassed = Date.now() - start;
 
-  // малюємо анімацію в момент часу timePassed
-  draw(timePassed);
+        train.style.left = timePassed / 5 + 'px';
 
-}, 20);
+        if (timePassed > 2000) clearInterval(timer);
 
-// коли timePassed змінюється від 0 до 2000
-// left отримує значення від 0px до 400px
-function draw(timePassed) {
-  train.style.left = timePassed / 5 + 'px';
-}
-</script>
+      }, 20);
+    }
+  </script>
+
 
 </body>
+
 </html>
