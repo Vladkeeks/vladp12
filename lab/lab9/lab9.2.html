@@ -37,6 +37,18 @@
             opacity: 0;
             transition: opacity 1s ease, color 2s ease;
         }
+
+        #softwareEngineering {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
+            opacity: 0;
+            transition: opacity 1s ease, color 2s ease;
+            display: none;
+        }
     </style>
 </head>
 
@@ -44,6 +56,7 @@
     <div id="container">
         <img id="logo" src="https://i.pinimg.com/564x/0a/3d/72/0a3d7206819baafeddaff4af59b3e95e.jpg" alt="Background Image">
         <div id="text">SOFTWARE ENGINEERING</div>
+        <div id="softwareEngineering">Software Engineering</div>
     </div>
 
     <script>
@@ -51,6 +64,7 @@
             const container = document.getElementById('container');
             const logo = document.getElementById('logo');
             const text = document.getElementById('text');
+            const softwareEngineering = document.getElementById('softwareEngineering');
 
             container.addEventListener('click', startAnimation);
 
@@ -69,48 +83,39 @@
                 logo.src = 'https://i.pinimg.com/originals/78/c6/33/78c6338be3853a3e2aa67711e854038f.gif';
                 logo.style.opacity = 1;
                 text.style.display = 'none';
-
+                softwareEngineering.style.display = 'block';
+                animateText(softwareEngineering);
                 setTimeout(changeToNewImage, 3000);
+            }
+
+            function animateText(textArea) {
+                let text = textArea.innerText;
+                let to = text.length,
+                    from = 0;
+
+                animate({
+                    duration: 5000,
+                    timing: bounce,
+                    draw: function (progress) {
+                        let result = (to - from) * progress + from;
+                        textArea.innerText = text.slice(0, Math.ceil(result))
+                    }
+                });
+            }
+
+            function bounce(timeFraction) {
+                for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                    if (timeFraction >= (7 - 4 * a) / 11) {
+                        return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                    }
+                }
             }
 
             function changeToNewImage() {
                 logo.src = 'https://i.pinimg.com/564x/e5/6a/cb/e56acbad0960ccd8c192de1849fa6dd5.jpg';
                 text.innerText = 'SOFTWARE ENGINEERING';
                 text.style.display = 'block';
-                animateText();
-                setTimeout(startSlideShow, 2000); // Запуск слайд-шоу через 2 секунди
-            }
-
-            function animateText() {
-                let opacity = 0;
-                let animation = setInterval(function () {
-                    if (opacity >= 1) {
-                        clearInterval(animation);
-                    } else {
-                        opacity += 0.05;
-                        text.style.opacity = opacity;
-                    }
-                }, 50);
-            }
-
-            function startSlideShow() {
-                const images = [
-                    'https://i.pinimg.com/564x/65/fd/b8/65fdb83063ed6612301b107b7585146e.jpg',
-                    'https://i.pinimg.com/564x/07/15/e4/0715e44f8d6e6b154d43358e132e09fd.jpg',
-                    'https://i.pinimg.com/564x/40/90/8e/40908e324b4095e388484642ba04c4e6.jpg',
-                    'https://i.pinimg.com/564x/72/37/29/723729f991b9eaa3227420f83f7c0702.jpg'
-                ];
-
-                let index = 0;
-
-                function showNextImage() {
-                    if (index < images.length) {
-                        logo.src = images[index++];
-                        setTimeout(showNextImage, 4000); // Затримка між зображеннями у 4 секунди
-                    }
-                }
-
-                showNextImage();
+                text.style.opacity = 1;
             }
         });
     </script>
