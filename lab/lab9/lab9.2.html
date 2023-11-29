@@ -16,17 +16,13 @@
             position: relative;
             width: 25vh; /* Задаємо ширину і висоту контейнера */
             height: 25vh;
+            overflow: hidden;
         }
 
         #logo {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease, color 2s ease;
         }
 
         #text {
@@ -36,6 +32,8 @@
             transform: translate(-50%, -50%);
             font-size: 2em;
             color: white;
+            opacity: 0;
+            transition: opacity 1s ease, color 2s ease;
         }
     </style>
 </head>
