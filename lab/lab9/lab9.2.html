@@ -11,11 +11,12 @@
             background-image: url('https://i.pinimg.com/564x/0a/3d/72/0a3d7206819baafeddaff4af59b3e95e.jpg');
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            height: 25vh; /* Лише 1/4 висоти сторінки */
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
+            overflow: hidden; /* Щоб обмежити видиму частину фону */
         }
 
         #logo {
@@ -23,9 +24,8 @@
             /* Наприклад, текстовий логотип зі стилізацією */
             font-size: 4em;
             color: white;
-            text-transform: uppercase;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 1s ease, color 2s ease; /* Додано транзицію для зміни кольору */
         }
     </style>
 </head>
@@ -38,9 +38,12 @@
             document.getElementById('logo').addEventListener('click', startAnimation);
 
             function startAnimation() {
-                // Анімація руху тексту
+                // Анімація з'явлення та руху тексту
                 document.getElementById('logo').style.opacity = 1;
                 document.getElementById('logo').style.transform = 'translateY(-50px)';
+                
+                // Анімація зміни кольору тексту
+                document.getElementById('logo').style.color = 'rgba(128, 128, 128, 1)'; // Сірий колір
                 
                 // Додати інші анімації, такі як зміна кольору, з'явлення нових об'єктів, тощо
                 
