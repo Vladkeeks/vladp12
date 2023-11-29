@@ -14,8 +14,8 @@
 
         #container {
             position: relative;
-            width: 70vh; /* Задаємо ширину і висоту контейнера */
-            height: 70vh;
+            width: 25vh; /* Задаємо ширину і висоту контейнера */
+            height: 25vh;
             overflow: hidden;
         }
 
@@ -23,6 +23,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 1;
+            transition: opacity 2s ease-in-out;
         }
 
         #text {
@@ -46,16 +48,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('container').addEventListener('click', startAnimation);
+            const container = document.getElementById('container');
+            const logo = document.getElementById('logo');
+            const text = document.getElementById('text');
+
+            container.addEventListener('click', startAnimation);
 
             function startAnimation() {
-                document.getElementById('text').style.opacity = 1;
-                document.getElementById('text').style.color = 'rgba(128, 128, 128, 1)';
+                text.style.opacity = 1;
+                text.style.color = 'rgba(128, 128, 128, 1)';
                 setTimeout(stopAnimation, 5000);
             }
 
             function stopAnimation() {
-                document.getElementById('text').style.opacity = 0;
+                text.style.opacity = 0;
+                setTimeout(changeImage, 2000);
+            }
+
+            function changeImage() {
+                logo.src = 'https://i.pinimg.com/originals/78/c6/33/78c6338be3853a3e2aa67711e854038f.gif';
+                logo.style.opacity = 1;
+                text.style.display = 'none'; // Приховуємо текст після зміни зображення
             }
         });
     </script>
