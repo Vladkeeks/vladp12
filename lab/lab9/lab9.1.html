@@ -1,129 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Animations Example</title>
   <style>
-    .box {
+    #animatedElement {
       width: 50px;
       height: 50px;
-      background-color: red;
-      position: relative;
-      margin-bottom: 20px;
+      background-color: blue;
+      position: absolute;
+      top: 50%;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <div class="box" id="intervalAnimation"></div>
-  <div class="box" id="requestAnimationFrame"></div>
-  <div class="box" id="structuredAnimation"></div>
-  <div class="box" id="timingFunctions"></div>
-  <div class="box" id="elasticAnimation"></div>
-  
+  <div id="animatedElement"></div>
+
   <script>
-    // Використання setInterval
-    const intervalBox = document.getElementById('intervalAnimation');
-    let intervalPosition = 0;
+    let animatedElement = document.getElementById('animatedElement');
+    let position = 0;
+    let direction = 1;
 
-    setInterval(() => {
-      intervalPosition += 1;
-      intervalBox.style.left = intervalPosition + 'px';
-    }, 16); // 60 FPS
+    // Функція для анімації з використанням setInterval
+    setInterval(function() {
+      position += direction * 2;
+      animatedElement.style.left = position + 'px';
 
-    // Використання requestAnimationFrame
-    const requestAnimationFrameBox = document.getElementById('requestAnimationFrame');
-    let requestAnimationFramePosition = 0;
+      if (position >= window.innerWidth - animatedElement.clientWidth || position <= 0) {
+        direction = -direction;
+      }
+    }, 20);
 
-    function animateRequestAnimationFrame() {
-      requestAnimationFramePosition += 1;
-      requestAnimationFrameBox.style.left = requestAnimationFramePosition + 'px';
+    // Функція для плавної анімації з використанням requestAnimationFrame
+    let start = null;
+    let duration = 2000; // тривалість анімації в мілісекундах
 
-      if (requestAnimationFramePosition < 200) {
-        requestAnimationFrame(animateRequestAnimationFrame);
+    function animate(timestamp) {
+      if (!start) start = timestamp;
+      let progress = timestamp - start;
+
+      animatedElement.style.top = Math.sin(progress / duration * Math.PI) * 50 + 'px';
+
+      if (progress < duration) {
+        requestAnimationFrame(animate);
       }
     }
 
-    animateRequestAnimationFrame();
-
-    // Структурована анімація
-    const structuredAnimationBox = document.getElementById('structuredAnimation');
-    let structuredPosition = 0;
-
-    function step(time) {
-      structuredPosition += 1;
-      structuredAnimationBox.style.left = structuredPosition + 'px';
-
-      if (structuredPosition < 200) {
-        setTimeout(() => requestAnimationFrame(step), 16);
-      }
-    }
-
-    requestAnimationFrame(step);
-
-    // Функції часу (timing functions)
-    const timingFunctionsBox = document.getElementById('timingFunctions');
-
-    function circ(timeFraction) {
-      return 1 - Math.sin(Math.acos(timeFraction));
-    }
-
-    function makeEaseOut(timing) {
-      return function(timeFraction) {
-        return 1 - timing(1 - timeFraction);
-      }
-    }
-
-    const circEaseOut = makeEaseOut(circ);
-
-    function animateTimingFunctions(timeFraction, element) {
-      const position = 200 * timeFraction;
-      element.style.left = position + 'px';
-    }
-
-    function drawTimingFunctions(progress, element, timingFunction) {
-      const timeFraction = timingFunction(progress);
-      animateTimingFunctions(timeFraction, element);
-    }
-
-    let progress = 0;
-    let timingFunctionsInterval = setInterval(() => {
-      if (progress <= 1) {
-        drawTimingFunctions(progress, timingFunctionsBox, circEaseOut);
-        progress += 0.01;
-      } else {
-        clearInterval(timingFunctionsInterval);
-      }
-    }, 16);
-
-    // Еластична анімація
-    const elasticAnimationBox = document.getElementById('elasticAnimation');
-    let elasticPosition = 0;
-    let elasticX = 2;
-
-    function elastic(timeFraction) {
-      return Math.pow(2, -10 * timeFraction) * Math.sin((timeFraction - elasticX / 4) * (Math.PI * 2) / elasticX) + 1;
-    }
-
-    function animateElasticAnimation(timeFraction, element) {
-      const position = 200 * timeFraction;
-      element.style.left = position + 'px';
-    }
-
-    function drawElasticAnimation(progress, element, timingFunction) {
-      const timeFraction = timingFunction(progress);
-      animateElasticAnimation(timeFraction, element);
-    }
-
-    let elasticProgress = 0;
-    let elasticInterval = setInterval(() => {
-      if (elasticProgress <= 1) {
-        drawElasticAnimation(elasticProgress, elasticAnimationBox, elastic);
-        elasticProgress += 0.01;
-      } else {
-        clearInterval(elasticInterval);
-      }
-    }, 16);
-
+    requestAnimationFrame(animate);
   </script>
 </body>
 </html>
