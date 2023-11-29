@@ -14,8 +14,8 @@
 
         #container {
             position: relative;
-            width: 75vh; /* Задаємо ширину і висоту контейнера */
-            height: 75vh;
+            width: 25vh;
+            height: 25vh;
             overflow: hidden;
         }
 
@@ -62,13 +62,55 @@
 
             function stopAnimation() {
                 text.style.opacity = 0;
-                setTimeout(changeImage, 2000);
+                setTimeout(changeImage, 3000);
             }
 
             function changeImage() {
                 logo.src = 'https://i.pinimg.com/originals/78/c6/33/78c6338be3853a3e2aa67711e854038f.gif';
                 logo.style.opacity = 1;
-                text.style.display = 'none'; // Приховуємо текст після зміни зображення
+                text.style.display = 'none';
+
+                setTimeout(changeToNewImage, 3000);
+            }
+
+            function changeToNewImage() {
+                logo.src = 'https://i.pinimg.com/564x/e5/6a/cb/e56acbad0960ccd8c192de1849fa6dd5.jpg';
+                text.innerText = 'SOFTWARE ENGINEERING';
+                text.style.display = 'block';
+                animateText();
+                setTimeout(startSlideShow, 2000); // Запуск слайд-шоу через 2 секунди
+            }
+
+            function animateText() {
+                let opacity = 0;
+                let animation = setInterval(function () {
+                    if (opacity >= 1) {
+                        clearInterval(animation);
+                    } else {
+                        opacity += 0.05;
+                        text.style.opacity = opacity;
+                    }
+                }, 50);
+            }
+
+            function startSlideShow() {
+                const images = [
+                    'https://i.pinimg.com/564x/65/fd/b8/65fdb83063ed6612301b107b7585146e.jpg',
+                    'https://i.pinimg.com/564x/07/15/e4/0715e44f8d6e6b154d43358e132e09fd.jpg',
+                    'https://i.pinimg.com/564x/40/90/8e/40908e324b4095e388484642ba04c4e6.jpg',
+                    'https://i.pinimg.com/564x/72/37/29/723729f991b9eaa3227420f83f7c0702.jpg'
+                ];
+
+                let index = 0;
+
+                function showNextImage() {
+                    if (index < images.length) {
+                        logo.src = images[index++];
+                        setTimeout(showNextImage, 4000); // Затримка між зображеннями у 4 секунди
+                    }
+                }
+
+                showNextImage();
             }
         });
     </script>
