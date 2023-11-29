@@ -8,54 +8,56 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('https://i.pinimg.com/564x/0a/3d/72/0a3d7206819baafeddaff4af59b3e95e.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 25vh; /* Лише 1/4 висоти сторінки */
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Щоб обмежити видиму частину фону */
+            overflow: hidden;
+        }
+
+        #container {
+            position: relative;
+            width: 25vh; /* Задаємо ширину і висоту контейнера */
+            height: 25vh;
         }
 
         #logo {
-            /* Стилі для логотипу (можна використовувати зображення або текст) */
-            /* Наприклад, текстовий логотип зі стилізацією */
-            font-size: 4em;
-            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             opacity: 0;
-            transition: opacity 1s ease, color 2s ease; /* Додано транзицію для зміни кольору */
+            transition: opacity 1s ease, color 2s ease;
+        }
+
+        #text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <div id="logo">Software Engineering</div>
+    <div id="container">
+        <img id="logo" src="https://i.pinimg.com/564x/0a/3d/72/0a3d7206819baafeddaff4af59b3e95e.jpg" alt="Background Image">
+        <div id="text">SOFTWARE ENGINEERING</div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('logo').addEventListener('click', startAnimation);
+            document.getElementById('container').addEventListener('click', startAnimation);
 
             function startAnimation() {
-                // Анімація з'явлення та руху тексту
-                document.getElementById('logo').style.opacity = 1;
-                document.getElementById('logo').style.transform = 'translateY(-50px)';
-                
-                // Анімація зміни кольору тексту
-                document.getElementById('logo').style.color = 'rgba(128, 128, 128, 1)'; // Сірий колір
-                
-                // Додати інші анімації, такі як зміна кольору, з'явлення нових об'єктів, тощо
-                
-                // Зупинка анімації через певний час (наприклад, через 5 секунд)
+                document.getElementById('text').style.opacity = 1;
+                document.getElementById('text').style.color = 'rgba(128, 128, 128, 1)';
                 setTimeout(stopAnimation, 5000);
             }
 
             function stopAnimation() {
-                // Код для зупинки анімації
-                // Наприклад, зміна стилів або зникнення елементів
-                document.getElementById('logo').style.opacity = 0;
-                document.getElementById('logo').style.transform = 'translateY(0)';
+                document.getElementById('text').style.opacity = 0;
             }
         });
     </script>
