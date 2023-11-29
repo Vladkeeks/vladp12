@@ -7,41 +7,60 @@
       position: relative;
       cursor: pointer;
     }
+    
     progress {
       width: 5%;
     }
-    
   </style>
-   <script src="animate.js"></script>
 </head>
 
 <body>
-
   <img id="train" src="https://js.cx/clipart/train.gif">
-
+  <progress id="elem" value="0" max="100"></progress>
 
   <script>
+    function animate({duration, timing, draw}) {
+      let start = performance.now();
+  
+      requestAnimationFrame(function animate(time) {
+        let timeFraction = (time - start) / duration;
+        if (timeFraction > 1) timeFraction = 1;
+  
+        let progress = timing(timeFraction)
+  
+        draw(progress);
+  
+        if (timeFraction < 1) {
+          requestAnimationFrame(animate);
+        }
+      });
+    }
+  
+    let train = document.getElementById('train');
+    let elem = document.getElementById('elem');
+  
     animate({
-  duration: 1000,
-  timing(timeFraction) {
-    return timeFraction;
-  },
-  draw(progress) {
-    elem.style.width = progress * 100 + '%';
-  }
-});
+      duration: 1000,
+      timing(timeFraction) {
+        return timeFraction;
+      },
+      draw(progress) {
+        elem.style.width = progress * 100 + '%';
+      }
+    });
+  
     train.onclick = function() {
       let start = Date.now();
-
+  
       let timer = setInterval(function() {
         let timePassed = Date.now() - start;
-
+  
         train.style.left = timePassed / 5 + 'px';
-
+  
         if (timePassed > 2000) clearInterval(timer);
-
       }, 20);
     }
+  
     elem.onclick = function() {
       animate({
         duration: 1000,
@@ -54,6 +73,6 @@
       });
     };
   </script>
-
-
 </body>
+
+</html>
