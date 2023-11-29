@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Анімація</title>
   <style>
-    .cube {
+    #animatedElement {
       width: 50px;
       height: 50px;
-      position: absolute;
-    }
-
-    #cube1 {
-      background-color: blue;
-      top: 50px;
-      left: 50px;
-    }
-
-    #cube2 {
       background-color: red;
-      top: 50px;
-      left: 150px;
+      position: absolute;
     }
   </style>
 </head>
 <body>
-  <div class="cube" id="cube1">Функція 1</div>
-  <div class="cube" id="cube2">Функція 2</div>
 
-  <script>
-    function animateCube1(timestamp) {
-      let cube1 = document.getElementById('cube1');
-      let currentTime = timestamp * 0.001; // конвертуємо в секунди
+<div id="animatedElement"></div>
 
-      cube1.style.top = Math.sin(currentTime) * 50 + 'px';
-      cube1.style.left = Math.cos(currentTime) * 50 + 'px';
+<script>
+  let animatedElement = document.getElementById('animatedElement');
+  let start = Date.now();
+  let direction = 1;
+  let timer = setInterval(function() {
+    let timePassed = Date.now() - start;
 
-      requestAnimationFrame(animateCube1);
+    // Зміна напрямку, якщо досягнуті межі
+    if (parseInt(animatedElement.style.left) >= 200 || parseInt(animatedElement.style.left) <= 0) {
+      direction *= -1;
     }
 
-    function animateCube2(timestamp) {
-      let cube2 = document.getElementById('cube2');
-      let currentTime = timestamp * 0.001; // конвертуємо в секунди
-
-      cube2.style.top = Math.cos(currentTime) * 50 + 'px';
-      cube2.style.left = Math.sin(currentTime) * 50 + 'px';
-
-      requestAnimationFrame(animateCube2);
+    if (timePassed >= 2000) {
+      clearInterval(timer);
+      return;
     }
 
-    requestAnimationFrame(animateCube1);
-    requestAnimationFrame(animateCube2);
-  </script>
+    // Переміщення елементу вліво та вправо
+    animatedElement.style.left = parseInt(animatedElement.style.left || 0) + (2 * direction) + 'px';
+  }, 20);
+</script>
+
 </body>
 </html>
