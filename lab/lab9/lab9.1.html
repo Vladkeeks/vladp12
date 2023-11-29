@@ -2,50 +2,52 @@
 <html>
 <head>
   <style>
-    #animatedElement {
+    .cube {
       width: 50px;
       height: 50px;
-      background-color: blue;
       position: absolute;
-      top: 50%;
-      left: 0;
+    }
+
+    #cube1 {
+      background-color: blue;
+      top: 50px;
+      left: 50px;
+    }
+
+    #cube2 {
+      background-color: red;
+      top: 50px;
+      left: 150px;
     }
   </style>
 </head>
 <body>
-  <div id="animatedElement"></div>
+  <div class="cube" id="cube1">Функція 1</div>
+  <div class="cube" id="cube2">Функція 2</div>
 
   <script>
-    let animatedElement = document.getElementById('animatedElement');
-    let position = 0;
-    let direction = 1;
+    function animateCube1(timestamp) {
+      let cube1 = document.getElementById('cube1');
+      let currentTime = timestamp * 0.001; // конвертуємо в секунди
 
-    // Функція для анімації з використанням setInterval
-    setInterval(function() {
-      position += direction * 2;
-      animatedElement.style.left = position + 'px';
+      cube1.style.top = Math.sin(currentTime) * 50 + 'px';
+      cube1.style.left = Math.cos(currentTime) * 50 + 'px';
 
-      if (position >= window.innerWidth - animatedElement.clientWidth || position <= 0) {
-        direction = -direction;
-      }
-    }, 20);
-
-    // Функція для плавної анімації з використанням requestAnimationFrame
-    let start = null;
-    let duration = 2000; // тривалість анімації в мілісекундах
-
-    function animate(timestamp) {
-      if (!start) start = timestamp;
-      let progress = timestamp - start;
-
-      animatedElement.style.top = Math.sin(progress / duration * Math.PI) * 50 + 'px';
-
-      if (progress < duration) {
-        requestAnimationFrame(animate);
-      }
+      requestAnimationFrame(animateCube1);
     }
 
-    requestAnimationFrame(animate);
+    function animateCube2(timestamp) {
+      let cube2 = document.getElementById('cube2');
+      let currentTime = timestamp * 0.001; // конвертуємо в секунди
+
+      cube2.style.top = Math.cos(currentTime) * 50 + 'px';
+      cube2.style.left = Math.sin(currentTime) * 50 + 'px';
+
+      requestAnimationFrame(animateCube2);
+    }
+
+    requestAnimationFrame(animateCube1);
+    requestAnimationFrame(animateCube2);
   </script>
 </body>
 </html>
