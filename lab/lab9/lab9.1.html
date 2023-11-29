@@ -3,38 +3,40 @@
 <head>
   <title>Анімація</title>
   <style>
-    #animatedElement {
-      width: 50px;
-      height: 50px;
-      background-color: red;
+    #train {
       position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: blue;
     }
   </style>
 </head>
 <body>
 
-<div id="animatedElement"></div>
+<div id="train"></div>
 
 <script>
-  let animatedElement = document.getElementById('animatedElement');
-  let start = Date.now();
-  let direction = 1;
-  let timer = setInterval(function() {
-    let timePassed = Date.now() - start;
+let start = Date.now(); // зберігаємо час початку
 
-    // Зміна напрямку, якщо досягнуті межі
-    if (parseInt(animatedElement.style.left) >= 200 || parseInt(animatedElement.style.left) <= 0) {
-      direction *= -1;
-    }
+let timer = setInterval(function() {
+  // скільки часу пройшло від початку?
+  let timePassed = Date.now() - start;
 
-    if (timePassed >= 2000) {
-      clearInterval(timer);
-      return;
-    }
+  if (timePassed >= 2000) {
+    clearInterval(timer); // завершуємо анімацію через 2 секунди
+    return;
+  }
 
-    // Переміщення елементу вліво та вправо
-    animatedElement.style.left = parseInt(animatedElement.style.left || 0) + (2 * direction) + 'px';
-  }, 20);
+  // малюємо анімацію в момент часу timePassed
+  draw(timePassed);
+
+}, 20);
+
+// коли timePassed змінюється від 0 до 2000
+// left отримує значення від 0px до 400px
+function draw(timePassed) {
+  train.style.left = timePassed / 5 + 'px';
+}
 </script>
 
 </body>
