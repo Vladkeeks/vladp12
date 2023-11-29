@@ -25,6 +25,17 @@
       width: 540px;
       height: 20px;
     }
+
+    textarea {
+      display: block;
+      border: 1px solid #BBB;
+      color: #444;
+      font-size: 110%;
+    }
+
+    button {
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -44,6 +55,14 @@
   <div id="path2">
     <div id="brick2"></div>
   </div>
+
+  <h2>Анімація показу тексту</h2>
+  <textarea id="textExample" rows="5" cols="60">He took his vorpal sword in hand:
+Long time the manxome foe he sought—
+So rested he by the Tumtum tree,
+And stood awhile in thought.
+  </textarea>
+  <button onclick="animateText(textExample)">Run the animated typing!</button>
 
   <script>
     function animate({duration, timing, draw}) {
@@ -148,6 +167,29 @@
         }
       });
     };
+
+    function animateText(textArea) {
+      let text = textArea.value;
+      let to = text.length,
+        from = 0;
+
+      animate({
+        duration: 5000,
+        timing: bounce,
+        draw: function(progress) {
+          let result = (to - from) * progress + from;
+          textArea.value = text.slice(0, Math.ceil(result))
+        }
+      });
+    }
+
+    function bounce(timeFraction) {
+      for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+        }
+      }
+    }
   </script>
 </body>
 
