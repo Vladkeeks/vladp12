@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Software Engineering Logo Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/564x/0a/3d/72/0a3d7206819baafeddaff4af59b3e95e.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #logo {
+            /* Стилі для логотипу (можна використовувати зображення або текст) */
+            /* Наприклад, текстовий логотип зі стилізацією */
+            font-size: 4em;
+            color: white;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="logo">Software Engineering</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('logo').addEventListener('click', startAnimation);
+
+            function startAnimation() {
+                // Анімація руху тексту
+                document.getElementById('logo').style.opacity = 1;
+                document.getElementById('logo').style.transform = 'translateY(-50px)';
+                
+                // Додати інші анімації, такі як зміна кольору, з'явлення нових об'єктів, тощо
+                
+                // Зупинка анімації через певний час (наприклад, через 5 секунд)
+                setTimeout(stopAnimation, 5000);
+            }
+
+            function stopAnimation() {
+                // Код для зупинки анімації
+                // Наприклад, зміна стилів або зникнення елементів
+                document.getElementById('logo').style.opacity = 0;
+                document.getElementById('logo').style.transform = 'translateY(0)';
+            }
+        });
+    </script>
+</body>
+
+</html>
