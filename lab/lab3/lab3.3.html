@@ -1,83 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
-    <title>Екранна клавіатура</title>
-    <style>
-        .keyboard-button {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 1px solid #ccc;
-            margin: 5px;
-            text-align: center;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Екранна клавіатура</title>
+  <style>
+    .keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .key {
+      padding: 8px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 10px;
+      resize: none;
+    }
+  </style>
 </head>
 <body>
-    <div id="keyboard">
-    </div>
+  <div class="keyboard" id="keyboard"></div>
+  <button onclick="clearTextarea()">Очистити поле</button>
+  <textarea id="textarea" readonly></textarea>
+  <button onclick="toggleLayout()">Alt+Shift</button>
 
-    <br>
+  <script>
+    const ukrainianLayout = [
+      ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'ж', 'з'],
+      ['и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о'],
+      ['п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч'],
+      ['ш', 'щ', 'ь', 'ю', 'я', "'", 'ї', 'ґ']
+    ];
 
-    <button id="toggle-layout" onclick="toggleLayout()">Alt+Shift</button>
-    <button onclick="clearText()">Очистити поле</button>
+    const englishLayout = [
+      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'],
+      ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r'],
+      ['s', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    ];
 
-    <br>
+    let currentLayout = ukrainianLayout;
+    let isUkrainianLayout = true;
 
-    <textarea id="text-area" rows="5" cols="50"></textarea>
+    function createKeyboard(layout) {
+      const keyboardElement = document.getElementById('keyboard');
+      keyboardElement.innerHTML = '';
+      
+      layout.forEach(row => {
+        const rowElement = document.createElement('div');
+        rowElement.classList.add('keyboard-row');
+        row.forEach(key => {
+          const keyElement = document.createElement('div');
+          keyElement.classList.add('key');
+          keyElement.textContent = key;
+          keyElement.addEventListener('click', () => writeToTextarea(key));
+          rowElement.appendChild(keyElement);
+        });
+        keyboardElement.appendChild(rowElement);
+      });
+    }
 
-    <script>
-        let isUkrainianLayout = true;
-        const ukrainianLetters = ['а','б','в','г','д','е','є','и','і','ї'];
-        const englishLetters = ['a','b','v','h','d','e','ye','y','i','yi'];
+    function writeToTextarea(value) {
+      const textarea = document.getElementById('textarea');
+      textarea.value += value;
+    }
 
-        function addLetter(letter) {
-            const textArea = document.getElementById('text-area');
-            const index = isUkrainianLayout ? ukrainianLetters.indexOf(letter) : englishLetters.indexOf(letter);
-            if (index !== -1) {
-                textArea.value += isUkrainianLayout ? englishLetters[index] : ukrainianLetters[index];
-            }
-        }
+    function clearTextarea() {
+      const textarea = document.getElementById('textarea');
+      textarea.value = '';
+    }
 
-        function clearText() {
-            const textArea = document.getElementById('text-area');
-            textArea.value = '';
-        }
+    function toggleLayout() {
+      const layoutButton = document.querySelector('button');
+      isUkrainianLayout = !isUkrainianLayout;
+      currentLayout = isUkrainianLayout ? ukrainianLayout : englishLayout;
+      createKeyboard(currentLayout);
+      layoutButton.textContent = isUkrainianLayout ? 'Alt+Shift (Укр)' : 'Alt+Shift (Eng)';
+    }
 
-        function toggleLayout() {
-            isUkrainianLayout = !isUkrainianLayout;
-            const buttons = document.getElementsByClassName('keyboard-button');
-            const toggleButton = document.getElementById('toggle-layout');
-
-            for (let i = 0; i < buttons.length; i++) {
-                if (isUkrainianLayout) {
-                    buttons[i].textContent = ukrainianLetters[i];
-                    toggleButton.textContent = 'Alt+Shift (EN)';
-                } else {
-                    buttons[i].textContent = englishLetters[i];
-                    toggleButton.textContent = 'Alt+Shift (UK)';
-                }
-            }
-        }
-
-        // Функція для створення кнопок клавіатури
-        function createKeyboard() {
-            const keyboard = document.getElementById('keyboard');
-
-            for (let i = 0; i < ukrainianLetters.length; i++) {
-                const button = document.createElement('button');
-                button.className = 'keyboard-button';
-                button.textContent = ukrainianLetters[i];
-                button.setAttribute('onclick', `addLetter('${ukrainianLetters[i]}')`);
-                keyboard.appendChild(button);
-            }
-        }
-
-        // Створення клавіатури при завантаженні сторінки
-        window.onload = function() {
-            createKeyboard();
-        };
-    </script>
+    createKeyboard(ukrainianLayout);
+  </script>
 </body>
 </html>
