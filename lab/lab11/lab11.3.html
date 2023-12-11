@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Методи</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      // Метод .add(): Об'єднання обраного елементу з новим
+      $("#btnAdd").click(function(){
+        $("p").add("span").css("background-color", "yellow");
+      });
+
+      // Метод .has(): Відбір елементів, які мають підсумки пошуку
+      $("#btnHas").click(function(){
+        var result = $("div").has("p");
+        result.css("border", "2px solid red");
+      });
+
+      // Метод .parents(): Вибір всіх батьків елементу
+      $("#btnParents").click(function(){
+        $("span").parents().css("color", "blue");
+      });
+
+      // Метод .closest(): Вибір найближчого батька
+      $("#btnClosest").click(function(){
+        $("span").closest("div").css("border", "2px solid green");
+      });
+
+      // Метод .map(): Виконання функції для кожного елементу, створення нового масиву
+      $("#btnMap").click(function(){
+        var arr = $("li").map(function(){
+          return $(this).text();
+        }).get();
+        alert(arr);
+      });
+    });
+  </script>
+  <style>
+    div {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <p>Це параграф</p>
+  <div>
+    <p>Це параграф у блоку div</p>
+    <span>Це спан у блоку div</span>
+    <ul>
+      <li>Елемент 1</li>
+      <li>Елемент 2</li>
+    </ul>
+  </div>
+
+  <button id="btnAdd">Метод .add()</button>
+  <button id="btnHas">Метод .has()</button>
+  <button id="btnParents">Метод .parents()</button>
+  <button id="btnClosest">Метод .closest()</button>
+  <button id="btnMap">Метод .map()</button>
+</body>
+</html>
