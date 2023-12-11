@@ -1,50 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>jQuery Методи</title>
+  <meta charset="UTF-8">
+  <title>jQuery Methods Demo</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      // Додаємо новий елемент після елементу з ідентифікатором "list"
-      $("#list").append("<li>Новий пункт списку</li>");
-
-      // Клонуємо елемент з ідентифікатором "original"
-      var clonedElement = $("#original").clone();
-      $("#container").append(clonedElement);
-
-      // Змінюємо ширину елементу з ідентифікатором "box" залежно від поточної ширини
-      $("#box").width(function(index, width){
-        return width * 1.5; // Збільшуємо ширину на 50%
-      });
-
-      // Виводимо зовнішню ширину елементу з ідентифікатором "box" у консоль
-      var outerWidth = $("#box").outerWidth();
-      console.log("Зовнішня ширина елементу: " + outerWidth + "px");
-    });
-  </script>
-  <style>
-    #box {
-      width: 100px;
-      height: 100px;
-      padding: 20px;
-      border: 5px solid black;
-      margin: 10px;
-      background-color: blue;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <ul id="list">
-    <li>Перший пункт</li>
-    <li>Другий пункт</li>
-  </ul>
 
-  <div id="container">
-    <div id="original">
-      <p>Оригінальний елемент</p>
-    </div>
+<div id="content">
+  <div class="example1" id="appendExample">
+    <h2>.append() Method Example</h2>
+    <div id="appendContainer">Initial content</div>
+    <button onclick="addContent()">Add Content</button>
   </div>
 
-  <div id="box"></div>
+  <div class="example1" id="cloneExample">
+    <h2>.clone() Method Example</h2>
+    <div id="original">Original Element</div>
+    <button onclick="cloneElement()">Clone & Remove</button>
+  </div>
+
+  <div class="example1" id="widthExample">
+    <h2>.width() Method Example</h2>
+    <div id="dynamicWidthElement">Dynamic Width Element</div>
+    <button onclick="changeWidth()">Change Width</button>
+  </div>
+
+  <div class="example1" id="outerWidthExample">
+    <h2>.outerWidth() Method Example</h2>
+    <div id="outerWidthElement">Outer Width Element</div>
+    <button onclick="getOuterWidth()">Get Outer Width</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

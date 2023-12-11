@@ -29,4 +29,27 @@ function changeHTML() {
   function enableButton() {
     $('#disableBtn').removeAttr('disabled');
   }
+  // jQuery .append() Method Example
+function addContent() {
+    $('#appendContainer').append('<p>Additional content added using .append()</p>');
+  }
+  
+  // jQuery .clone() Method Example
+  function cloneElement() {
+    var clonedElement = $('#original').clone();
+    $('#original').remove(); // Removing the original element
+  }
+  
+  // jQuery .width() Method Example
+  function changeWidth() {
+    $('#dynamicWidthElement').width(function(index, width) {
+      return width * 2; // Doubling the width of the element
+    });
+  }
+  
+  // jQuery .outerWidth() Method Example
+  function getOuterWidth() {
+    var outerWidth = $('#outerWidthElement').outerWidth();
+    alert("Outer width of the element: " + outerWidth);
+  }
   
