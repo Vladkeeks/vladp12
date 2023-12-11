@@ -1,63 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>jQuery Методи</title>
+  <meta charset="UTF-8">
+  <title>jQuery Methods Demo</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      // Метод .add(): Об'єднання обраного елементу з новим
-      $("#btnAdd").click(function(){
-        $("p").add("span").css("background-color", "yellow");
-      });
-
-      // Метод .has(): Відбір елементів, які мають підсумки пошуку
-      $("#btnHas").click(function(){
-        var result = $("div").has("p");
-        result.css("border", "2px solid red");
-      });
-
-      // Метод .parents(): Вибір всіх батьків елементу
-      $("#btnParents").click(function(){
-        $("span").parents().css("color", "blue");
-      });
-
-      // Метод .closest(): Вибір найближчого батька
-      $("#btnClosest").click(function(){
-        $("span").closest("div").css("border", "2px solid green");
-      });
-
-      // Метод .map(): Виконання функції для кожного елементу, створення нового масиву
-      $("#btnMap").click(function(){
-        var arr = $("li").map(function(){
-          return $(this).text();
-        }).get();
-        alert(arr);
-      });
-    });
-  </script>
   <style>
-    div {
-      margin: 10px;
-      padding: 10px;
-      border: 1px solid black;
+    /* CSS styles */
+    .example {
+      margin-bottom: 20px;
+    }
+
+    #content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    button {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <p>Це параграф</p>
-  <div>
-    <p>Це параграф у блоку div</p>
-    <span>Це спан у блоку div</span>
-    <ul>
-      <li>Елемент 1</li>
-      <li>Елемент 2</li>
-    </ul>
+
+<div id="content">
+  <div class="example" id="addExample">
+    <h2>.add() Method Example</h2>
+    <div id="div1">Div 1</div>
+    <div id="div2">Div 2</div>
+    <button onclick="addElements()">Add div2 to div1</button>
   </div>
 
-  <button id="btnAdd">Метод .add()</button>
-  <button id="btnHas">Метод .has()</button>
-  <button id="btnParents">Метод .parents()</button>
-  <button id="btnClosest">Метод .closest()</button>
-  <button id="btnMap">Метод .map()</button>
+  <div class="example" id="hasExample">
+    <h2>.has() Method Example</h2>
+    <div id="container">
+      <div class="parent">
+        <div class="child">Child 1</div>
+        <div class="child">Child 2</div>
+      </div>
+      <div class="parent">
+        <div class="child">Child 3</div>
+      </div>
+    </div>
+    <button onclick="findHas()">Find divs with children</button>
+  </div>
+
+  <div class="example" id="parentsExample">
+    <h2>.parents() Method Example</h2>
+    <div id="grandparent">
+      <div id="parent">
+        <div id="child">Target Element</div>
+      </div>
+    </div>
+    <button onclick="showParents()">Show parents of the target element</button>
+  </div>
+
+  <div class="example" id="closestExample">
+    <h2>.closest() Method Example</h2>
+    <div id="closestContainer">
+      <p>Target paragraph</p>
+      <div>
+        <span>Inner span</span>
+        <button onclick="findClosest()">Find closest 'div' element</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="example" id="mapExample">
+    <h2>.map() Method Example</h2>
+    <ul id="list">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+    <button onclick="mapListItems()">Map list items</button>
+  </div>
+</div>
+
+<script>
+  // JavaScript/jQuery code
+  function addElements() {
+    $('#div1').add('#div2').css('border', '2px solid red');
+  }
+
+  function findHas() {
+    var divsWithChildren = $('.parent').has('.child');
+    divsWithChildren.css('background-color', 'lightblue');
+  }
+
+  function showParents() {
+    var parents = $('#child').parents();
+    parents.css('border', '2px solid green');
+  }
+
+  function findClosest() {
+    var closestDiv = $('span').closest('div');
+    closestDiv.css('background-color', 'yellow');
+  }
+
+  function mapListItems() {
+    var mappedItems = $('#list li').map(function() {
+      return $(this).text();
+    }).get();
+
+    alert("Mapped items: " + mappedItems.join(', '));
+  }
+</script>
+
 </body>
 </html>
