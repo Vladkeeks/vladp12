@@ -9,7 +9,11 @@
       width: 100px;
       height: 100px;
       background-color: red;
+      opacity: 1;
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,13 +27,14 @@
   $(document).ready(function() {
     $('#square').animate(
       {
-        left: '+=200', // Move the square 200px to the right
-        top: '+=100', // Move the square 100px down
-        opacity: '0' // Fade out the square
+        width: '200px', // Increase width to 200px
+        height: '200px', // Increase height to 200px
+        backgroundColor: 'blue', // Change background color to blue
+        opacity: 0.5 // Reduce opacity to 0.5
       },
       {
         duration: 2000, // Animation duration in milliseconds
-        easing: 'linear', // Easing effect ('linear' for constant speed)
+        easing: 'easeInOutCubic', // Easing effect ('easeInOutCubic' for smooth animation)
         complete: function() {
           console.log('Animation complete'); // Log when animation completes
         },
@@ -38,8 +43,8 @@
         },
         queue: true, // Queue the animation
         specialEasing: {
-          left: 'swing', // 'swing' easing for left property
-          top: 'easeOutBounce' // 'easeOutBounce' easing for top property
+          width: 'linear', // 'linear' easing for width property
+          height: 'swing' // 'swing' easing for height property
         },
         start: function() {
           console.log('Animation started'); // Log when animation starts
