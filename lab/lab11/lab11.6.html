@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Animation Example</title>
+  <style>
+    /* CSS styles */
+    #square {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div id="square"></div>
+
+<script>
+  // JavaScript/jQuery code
+  $(document).ready(function() {
+    $('#square').animate(
+      {
+        left: '+=200', // Move the square 200px to the right
+        top: '+=100', // Move the square 100px down
+        opacity: '0' // Fade out the square
+      },
+      {
+        duration: 2000, // Animation duration in milliseconds
+        easing: 'linear', // Easing effect ('linear' for constant speed)
+        complete: function() {
+          console.log('Animation complete'); // Log when animation completes
+        },
+        step: function(now, fx) {
+          console.log(fx.prop + ' = ' + now); // Log current animated properties
+        },
+        queue: true, // Queue the animation
+        specialEasing: {
+          left: 'swing', // 'swing' easing for left property
+          top: 'easeOutBounce' // 'easeOutBounce' easing for top property
+        },
+        start: function() {
+          console.log('Animation started'); // Log when animation starts
+        }
+      }
+    );
+  });
+</script>
+
+</body>
+</html>
