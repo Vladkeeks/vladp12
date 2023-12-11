@@ -4,12 +4,27 @@
   <meta charset="UTF-8">
   <title>jQuery Methods Demo</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* CSS styles */
+    .example {
+      margin-bottom: 20px;
+    }
+
+    #content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
 <div id="content">
-  <div class="" id="appendExample">
+  <div class="example" id="appendExample">
     <h2>.append() Method Example</h2>
     <div id="appendContainer">Initial content</div>
     <button onclick="addContent()">Add Content</button>
@@ -34,6 +49,28 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+  // JavaScript/jQuery code
+  function addContent() {
+    $('#appendContainer').append('<p>Additional content added using .append()</p>');
+  }
+
+  function cloneElement() {
+    var clonedElement = $('#original').clone();
+    $('#original').remove(); // Removing the original element
+  }
+
+  function changeWidth() {
+    $('#dynamicWidthElement').width(function(index, width) {
+      return width * 2; // Doubling the width of the element
+    });
+  }
+
+  function getOuterWidth() {
+    var outerWidth = $('#outerWidthElement').outerWidth();
+    alert("Outer width of the element: " + outerWidth);
+  }
+</script>
+
 </body>
 </html>
