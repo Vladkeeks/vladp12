@@ -1,36 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>jQuery Методи</title>
+  <meta charset="UTF-8">
+  <title>jQuery Methods Demo</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      // Задаємо HTML-вміст елементу з ідентифікатором "content"
-      $("#content").html("<p>Це новий вміст.</p>");
-
-      // Змінюємо CSS властивість color для елементу з ідентифікатором "content"
-      $("#content").css("color", "red");
-
-      // Задаємо значення поля введення з ідентифікатором "inputField"
-      $("#inputField").val("Нове значення");
-
-      // Додаємо атрибут "title" зі значенням "Підказка" до кнопки
-      $("button").attr("title", "Підказка");
-
-      // Видаляємо атрибут "title" з кнопки через певний інтервал часу (наприклад, 2 секунди)
-      setTimeout(function(){
-        $("button").removeAttr("title");
-      }, 2000);
-    });
-  </script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="content">
-    <p>Початковий вміст</p>
+
+<div id="content">
+  <div class="example" id="htmlExample">
+    <h2>.html() Method Example</h2>
+    <div id="htmlContent">Initial content</div>
+    <button onclick="changeHTML()">Change Content</button>
   </div>
 
-  <input type="text" id="inputField" value="Початкове значення">
+  <div class="example" id="cssExample">
+    <h2>.css() Method Example</h2>
+    <div id="cssContent">Styling Example</div>
+    <button onclick="applyStyles()">Apply Styles</button>
+  </div>
 
-  <button>Натисніть мене</button>
+  <div class="example" id="valExample">
+    <h2>.val() Method Example</h2>
+    <input type="text" id="inputField" value="Initial value">
+    <button onclick="changeValue()">Change Value</button>
+  </div>
+
+  <div class="example" id="attrExample">
+    <h2>.attr() Method Example</h2>
+    <img id="image" src="https://via.placeholder.com/150" alt="Sample Image">
+    <button onclick="changeAttributes()">Change Attributes</button>
+  </div>
+
+  <div class="example" id="removeAttrExample">
+    <h2>.removeAttr() Method Example</h2>
+    <button id="disableBtn" disabled>Click me</button>
+    <button onclick="enableButton()">Enable Button</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
