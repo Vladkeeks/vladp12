@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Методи</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      // Задаємо HTML-вміст елементу з ідентифікатором "content"
+      $("#content").html("<p>Це новий вміст.</p>");
+
+      // Змінюємо CSS властивість color для елементу з ідентифікатором "content"
+      $("#content").css("color", "red");
+
+      // Задаємо значення поля введення з ідентифікатором "inputField"
+      $("#inputField").val("Нове значення");
+
+      // Додаємо атрибут "title" зі значенням "Підказка" до кнопки
+      $("button").attr("title", "Підказка");
+
+      // Видаляємо атрибут "title" з кнопки через певний інтервал часу (наприклад, 2 секунди)
+      setTimeout(function(){
+        $("button").removeAttr("title");
+      }, 2000);
+    });
+  </script>
+</head>
+<body>
+  <div id="content">
+    <p>Початковий вміст</p>
+  </div>
+
+  <input type="text" id="inputField" value="Початкове значення">
+
+  <button>Натисніть мене</button>
+</body>
+</html>
