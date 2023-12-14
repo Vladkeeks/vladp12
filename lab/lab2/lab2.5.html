@@ -20,8 +20,7 @@
     console.dir(obj);
 
     // Using console.dirxml()
-    const xmlString = '<person><name>Emily</name><age>25</age></person>';
-    console.dirxml(xmlString);
+    console.dirxml('<person><name>Emily</name><age>25</age></person>');
 
     // Using console.time() and console.timeEnd()
     console.time('timer');
@@ -30,14 +29,6 @@
       // Do something
     }
     console.timeEnd('timer'); // Output time taken for the loop execution
-
-    // Using console.profile() and console.profileEnd() (Deprecated in some environments)
-    console.profile('Profile');
-    // Simulating another task
-    for (let i = 0; i < 1000000; i++) {
-      // Do something else
-    }
-    console.profileEnd('Profile'); // End profiling
 
     // Using console.assert()
     console.assert(5 === 5, 'Assertion passed.'); // Assertion passes
