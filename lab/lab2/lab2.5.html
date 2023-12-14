@@ -1,66 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Console Methods</title>
 </head>
 <body>
-  <h1>Робота з методами console</h1>
-  <!-- Кнопки для виклику методів -->
-  <button onclick="logInfo()">console.info()</button>
-  <button onclick="logWarn()">console.warn()</button>
-  <button onclick="logError()">console.error()</button>
-  <button onclick="logDir()">console.dir()</button>
-  <button onclick="logDirXml()">console.dirxml()</button>
-  <button onclick="logTimeStart()">console.time()</button>
-  <button onclick="logTimeEnd()">console.timeEnd()</button>
-  <button onclick="logProfileStart()">console.profile()</button>
-  <button onclick="logProfileEnd()">console.profileEnd()</button>
-  <button onclick="logAssert()">console.assert()</button>
-
   <script>
-    function logInfo() {
-      console.info("Це інформаційне повідомлення.");
-    }
+    // Using console.info()
+    console.info('This is an information message.');
 
-    function logWarn() {
-      console.warn("Це попередження.");
-    }
+    // Using console.warn()
+    console.warn('This is a warning message.');
 
-    function logError() {
-      console.error("Це повідомлення про помилку.");
-    }
+    // Using console.error()
+    console.error('This is an error message.');
 
-    function logDir() {
-      const user = { name: "John", age: 30, country: "USA" };
-      console.dir(user);
-    }
+    // Using console.dir()
+    const obj = { name: 'John', age: 30, city: 'New York' };
+    console.dir(obj);
 
-    function logDirXml() {
-      const element = document.querySelector("div");
-      console.dirxml(element);
-    }
+    // Using console.dirxml()
+    const xmlString = '<person><name>Emily</name><age>25</age></person>';
+    console.dirxml(xmlString);
 
-    function logTimeStart() {
-      console.time("myTimer");
+    // Using console.time() and console.timeEnd()
+    console.time('timer');
+    // Simulating a task that takes some time (in this case, a loop)
+    for (let i = 0; i < 1000000; i++) {
+      // Do something
     }
+    console.timeEnd('timer'); // Output time taken for the loop execution
 
-    function logTimeEnd() {
-      console.timeEnd("myTimer");
+    // Using console.profile() and console.profileEnd() (Deprecated in some environments)
+    console.profile('Profile');
+    // Simulating another task
+    for (let i = 0; i < 1000000; i++) {
+      // Do something else
     }
+    console.profileEnd('Profile'); // End profiling
 
-    function logProfileStart() {
-      console.profile("myProfile");
-    }
-
-    function logProfileEnd() {
-      console.profileEnd("myProfile");
-    }
-
-    function logAssert() {
-      const x = 10;
-      console.assert(x === 5, "Значення x має бути рівним 5.");
-    }
+    // Using console.assert()
+    console.assert(5 === 5, 'Assertion passed.'); // Assertion passes
+    console.assert(5 === '5', 'Assertion failed.'); // Assertion fails
   </script>
 </body>
 </html>
