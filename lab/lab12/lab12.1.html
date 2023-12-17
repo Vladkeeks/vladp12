@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Анімація з .animate()</title>
+  <style>
+    #animatedElement {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+<div id="animatedElement"></div>
+
+<script>
+  const element = document.getElementById('animatedElement');
+
+  // Параметри для анімації
+  const properties = {
+    width: '300px',
+    height: '300px',
+    opacity: 0.5
+  };
+
+  const duration = 2000; // тривалість анімації в мілісекундах (2 секунди)
+  const easing = 'ease-in-out'; // тип анімаційної функції
+  const options = {
+    delay: 500, // затримка перед початком анімації (0.5 секунди)
+    iterations: 2, // кількість ітерацій анімації
+    direction: 'alternate' // напрямок анімації
+  };
+
+  // Запуск анімації з використанням методу .animate()
+  element.animate(properties, {
+    duration: duration,
+    easing: easing,
+    ...options,
+    complete() {
+      console.log('Анімація завершена!');
+    }
+  });
+</script>
+
+</body>
+</html>
