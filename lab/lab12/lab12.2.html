@@ -2,78 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>jQuery Анімація</title>
+  <title>jQuery Methods Example</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
-    .box {
-      width: 100px;
-      height: 100px;
-      background-color: red;
+    img {
+      display: none;
+    }
+    nav ul {
+      display: none;
+    }
+    .additional-info {
+      display: none;
+    }
+    #alertMessage {
       display: none;
     }
   </style>
 </head>
 <body>
 
-<div class="box"></div>
+<button id="fadeButton">Toggle Image</button>
+<img id="image" src="example.jpg">
+
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="info">
+  <p>Hover over this text</p>
+  <p class="additional-info">Additional details here.</p>
+</div>
+
+<button id="alertButton">Show Alert</button>
+<div id="alertMessage">This is an important message!</div>
 
 <script>
-  $(document).ready(function(){
-    const box = $('.box');
-
-    // fadeIn() - плавне з'явлення елементу
-    box.fadeIn(1000);
-
-    // fadeOut() - плавне зникнення елементу
-    box.fadeOut(1000);
-
-    // fadeTo() - зміна прозорості елементу до певного рівня
-    box.fadeTo(1000, 0.5);
-
-    // fadeToggle() - перемикач між fadeIn() та fadeOut()
-    box.fadeToggle(1000);
-
-    // show() - показ елементу з певною анімацією
-    box.show(1000);
-
-    // hide() - ховання елементу з певною анімацією
-    box.hide(1000);
-
-    // slideDown() - з'явлення елементу з плавним зсувом вниз
-    box.slideDown(1000);
-
-    // slideUp() - зникнення елементу з плавним зсувом вверх
-    box.slideUp(1000);
-
-    // slideToggle() - перемикач між slideDown() та slideUp()
-    box.slideToggle(1000);
-
-    // delay() - затримка перед виконанням наступної анімації
-    box.delay(1000).fadeIn(1000);
-
-    // stop() - зупинка анімації
-    box.stop();
-
-    // toggle() - перемикач між показом та хованням елементу
-    box.toggle(1000);
-
-    // queue() - додавання функції в чергу анімацій
-    box.queue(function(next) {
-      $(this).css('backgroundColor', 'blue');
-      next();
+  $(document).ready(function() {
+    // Scenario 1: fadeIn() and fadeOut()
+    $('#fadeButton').click(function() {
+      $('#image').fadeIn().fadeOut();
     });
 
-    // dequeue() - видалення функції з черги анімацій
-    box.dequeue();
+    // Scenario 2: slideUp() and slideDown()
+    $('nav').click(function() {
+      $('nav ul').slideToggle();
+    });
 
-    // clearQueue() - очищення черги анімацій
-    box.clearQueue();
+    // Scenario 3: show() and hide()
+    $('.info').hover(
+      function() {
+        $(this).find('.additional-info').show();
+      },
+      function() {
+        $(this).find('.additional-info').hide();
+      }
+    );
 
-    // finish() - завершення всіх анімацій на елементі
-    box.finish();
-
-    // $.fx.off - вимкнення анімації
-    $.fx.off = true;
+    // Scenario 4: delay() and fadeIn()
+    $('#alertButton').click(function() {
+      $('#alertMessage').delay(1000).fadeIn();
+    });
   });
 </script>
 
