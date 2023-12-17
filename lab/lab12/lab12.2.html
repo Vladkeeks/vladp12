@@ -67,6 +67,27 @@
       $('#alertMessage').delay(1000).fadeIn();
     });
   });
+  $(document).ready(function() {
+    // fadeIn(), fadeOut(), fadeToggle()
+    $('#button').click(function() {
+      $('#box')
+        .fadeIn(1000)
+        .delay(1000)
+        .fadeOut(1000)
+        .delay(1000)
+        .fadeToggle(1000);
+    });
+
+    // show(), hide(), slideToggle()
+    $('#box').click(function() {
+      $(this)
+        .hide(500)
+        .delay(500)
+        .show(500)
+        .delay(500)
+        .slideToggle(1000);
+    });
+  });
 </script>
 
 </body>
