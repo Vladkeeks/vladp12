@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Анімація</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box"></div>
+
+<script>
+  $(document).ready(function(){
+    const box = $('.box');
+
+    // fadeIn() - плавне з'явлення елементу
+    box.fadeIn(1000);
+
+    // fadeOut() - плавне зникнення елементу
+    box.fadeOut(1000);
+
+    // fadeTo() - зміна прозорості елементу до певного рівня
+    box.fadeTo(1000, 0.5);
+
+    // fadeToggle() - перемикач між fadeIn() та fadeOut()
+    box.fadeToggle(1000);
+
+    // show() - показ елементу з певною анімацією
+    box.show(1000);
+
+    // hide() - ховання елементу з певною анімацією
+    box.hide(1000);
+
+    // slideDown() - з'явлення елементу з плавним зсувом вниз
+    box.slideDown(1000);
+
+    // slideUp() - зникнення елементу з плавним зсувом вверх
+    box.slideUp(1000);
+
+    // slideToggle() - перемикач між slideDown() та slideUp()
+    box.slideToggle(1000);
+
+    // delay() - затримка перед виконанням наступної анімації
+    box.delay(1000).fadeIn(1000);
+
+    // stop() - зупинка анімації
+    box.stop();
+
+    // toggle() - перемикач між показом та хованням елементу
+    box.toggle(1000);
+
+    // queue() - додавання функції в чергу анімацій
+    box.queue(function(next) {
+      $(this).css('backgroundColor', 'blue');
+      next();
+    });
+
+    // dequeue() - видалення функції з черги анімацій
+    box.dequeue();
+
+    // clearQueue() - очищення черги анімацій
+    box.clearQueue();
+
+    // finish() - завершення всіх анімацій на елементі
+    box.finish();
+
+    // $.fx.off - вимкнення анімації
+    $.fx.off = true;
+  });
+</script>
+
+</body>
+</html>
