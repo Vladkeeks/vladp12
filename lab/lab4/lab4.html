@@ -89,22 +89,23 @@ function calculateScore() {
         selectedAnswers += checkbox.nextSibling.textContent + ', ';
         score += parseFloat(checkbox.value);
       });
+      if (selectedCheckboxes.length > 2) {
+        score = 0; 
+      }
     } else if (question.nextElementSibling.tagName === 'SELECT') {
       const selectedOptions = document.getElementById(`q${index + 1}`).selectedOptions;
       selectedAnswers = [...selectedOptions].map((option) => option.text).join(', ');
-
-      // Updated logic for Question 3 (pets) and Question 6 (history)
-      if (index + 1 === 3 || index + 1 === 6) {
+      if (selectedOptions.length === 2) {
         let correctAnswers = 0;
         selectedOptions.forEach((option) => {
           if (option.value === '1') {
             correctAnswers++;
           }
         });
-
-        // Check if exactly 2 correct answers were chosen
         if (correctAnswers === 2) {
           score = 2;
+        } else if (correctAnswers === 1) {
+          score = 1;
         } else {
           score = 0;
         }
@@ -118,7 +119,6 @@ function calculateScore() {
         score = 1;
       }
     }
-
 
     totalScore += score;
     const newRow = resultsTable.insertRow(-1);
