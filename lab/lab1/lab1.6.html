@@ -33,13 +33,10 @@ function fun1() {
     selectedContinentIndex = continent.indexOf(userInput);
 
     if (selectedContinentIndex !== -1) {
-        // Виведення густини населення в консоль
-        console.log("Густина населення:", density[selectedContinentIndex], "осіб/км²");
+         console.log("Густина населення:", density[selectedContinentIndex], "осіб/км²");
         
-        // Виведення площі в консоль
         console.log("Площа:", area[selectedContinentIndex], "км²");
 
-        // Відображення густини населення та площі на формі
         document.entryForm.density.value = density[selectedContinentIndex] + " осіб/км²";
         document.entryForm.area.value = area[selectedContinentIndex] + " км²";
     } else {
