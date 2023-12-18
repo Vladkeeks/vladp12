@@ -61,7 +61,6 @@
       <th>Обрані відповіді</th>
       <th>Бали</th>
     </tr>
-    <!-- Результати будуть відображені тут -->
   </table>
   <p>Загальний бал: <span id="totalScore"></span></p>
 </div>
@@ -78,31 +77,21 @@ function calculateScore() {
     let selectedAnswers = '';
     let score = 0;
 
-    if (question.nextElementSibling.type === 'radio') {
-      const selectedOption = document.querySelector(`input[name=q${index + 1}]:checked`);
-      if (selectedOption) {
-        selectedAnswers = selectedOption.nextSibling.textContent;
-        score = parseFloat(selectedOption.value);
-      }
-    } else if (question.nextElementSibling.type === 'checkbox') {
-      const selectedCheckboxes = document.querySelectorAll(`input[name=q${index + 1}]:checked`);
-      selectedCheckboxes.forEach((checkbox) => {
-        selectedAnswers += checkbox.nextSibling.textContent + ', ';
-        score += parseFloat(checkbox.value);
-      });
-      if (selectedCheckboxes.length > 2) {
-        score = 0; // Якщо обрано більше ніж 2 варіанти, оцінка 0.
-      }
-    } else if (question.nextElementSibling.tagName === 'SELECT') {
-      const selectedOptions = document.getElementById(`q${index + 1}`).selectedOptions;
-      selectedAnswers = [...selectedOptions].map((option) => option.text).join(', ');
-      if (selectedOptions.length === 2) {
+     // Updated logic for Question 3 (pets) and Question 6 (history)
+     if (index + 1 === 3 || index + 1 === 6) {
         let correctAnswers = 0;
         selectedOptions.forEach((option) => {
           if (option.value === '1') {
             correctAnswers++;
           }
         });
+
+        // Check if exactly 2 correct answers were chosen
+        if (correctAnswers === 2) {
+          score = 2;
+        } else {
+          score = 0;
+        }
         if (correctAnswers === 2) {
           score = 2;
         } else if (correctAnswers === 1) {
@@ -111,11 +100,11 @@ function calculateScore() {
           score = 0;
         }
       } else {
-        score = 0; // Якщо обрано не 2 варіанти, оцінка 0.
+        score = 0; 
       }
-    } else if (question.nextElementSibling.type === 'text') {
+     else if (question.nextElementSibling.type === 'text') {
       selectedAnswers = question.nextElementSibling.value;
-      const correctAnswer = "Амазонка"; // Правильна відповідь
+      const correctAnswer = "Амазонка"; 
       if (selectedAnswers.toLowerCase() === correctAnswer.toLowerCase()) {
         score = 1;
       }
