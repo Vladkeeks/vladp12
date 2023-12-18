@@ -13,7 +13,11 @@
   <input type="radio" name="q1" value="1" id="q1a3"> <label for="q1a3">Варшава</label><br>
   <input type="radio" name="q1" value="0" id="q1a4"> <label for="q1a4">Мінськ</label><br>
 
-  <!-- ... (other questions and options) ... -->
+  <p>Питання 2: Оберіть фрукти:</p>
+  <input type="checkbox" name="q2" value="1" id="q2a1"> <label for="q2a1">Яблуко</label><br>
+  <input type="checkbox" name="q2" value="1" id="q2a2"> <label for="q2a2">Апельсин</label><br>
+  <input type="checkbox" name="q2" value="0" id="q2a3"> <label for="q2a3">Ананас</label><br>
+  <input type="checkbox" name="q2" value="0" id="q2a4"> <label for="q2a4">Картопля</label><br>
 
   <p>Питання 3: Оберіть домашніх улюбленців:</p>
   <select id="q3" multiple>
@@ -23,7 +27,28 @@
     <option value="0">Корова</option>
   </select>
 
-  <!-- ... (other questions and options) ... -->
+  <p>Питання 4: Які з цих міст є столицями країн?</p>
+  <input type="checkbox" name="q4" value="1" id="q4a1"> <label for="q4a1">Вашингтон</label><br>
+  <input type="checkbox" name="q4" value="0" id="q4a2"> <label for="q4a2">Херсон</label><br>
+  <input type="checkbox" name="q4" value="1" id="q4a3"> <label for="q4a3">Лондон</label><br>
+  <input type="checkbox" name="q4" value="0" id="q4a4"> <label for="q4a4">Нью-Йорк</label><br>
+
+  <p>Питання 5: Яка найдовша річка в світі?</p>
+  <input type="text" id="q5">
+
+  <p>Питання 6: Що вивчають в історії?</p>
+  <select id="q6" multiple>
+    <option value="1">Події минулого</option>
+    <option value="1">Життя видатних осіб</option>
+    <option value="0">Розвиток інтернет-технологій</option>
+    <option value="0">Кулінарію</option>
+  </select>
+
+  <p>Питання 7: Яка мова є найпоширенішою в світі?</p>
+  <input type="radio" name="q7" value="1" id="q7a1"> <label for="q7a1">Англійська</label><br>
+  <input type="radio" name="q7" value="0" id="q7a2"> <label for="q7a2">Іспанська</label><br>
+  <input type="radio" name="q7" value="0" id="q7a3"> <label for="q7a3">Китайська</label><br>
+  <input type="radio" name="q7" value="0" id="q7a4"> <label for="q7a4">Російська</label><br>
 
   <button onclick="calculateScore()">Закінчити тест</button>
 </form>
