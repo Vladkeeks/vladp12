@@ -11,13 +11,13 @@ require 'config.php';
 <?php
 $zm=10;
 echo "<h2>Програмування мовою PHP</h2>
-<h3>Перелік лабораторних робіт Дутчак Марії</h3>
+<h3>Перелік лабораторних робіт Прокутко Владислава</h3>
 <h4>Варіант №1</h4>
 <div class=list>
-<a href=lab1_dutchak/lab1.php?zm=$zm>lab1.php</a><br>
-<a href=lab3_dutchak/lab3.php?zm=".$zm.">lab3.php</a><br>
-<a href=labJS_dutchak/labJS.php>PHP+JS</a><br>
-<a href=labDB_dutchak/labDB.php>PHP+DB</a><br>";
+<a href=lab1_prokutko/lab1.php?zm=$zm>lab1.php</a><br>
+<a href=lab3_prokutko/lab3.php?zm=".$zm.">lab3.php</a><br>
+<a href=labJS_prokutko/labJS.php>PHP+JS</a><br>
+<a href=labDB_prokutko/labDB.php>PHP+DB</a><br>";
 echo "</div>";
 echo "zm=$zm <br>";
 echo "Zm=$Zm <br>";
